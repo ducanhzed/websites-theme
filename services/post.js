@@ -22,7 +22,7 @@ class PostServices {
 
     }
     findPostById = async (id = new mongoose.Types.ObjectId) => {
-        return await Posts.findOne({ _id: id })
+        return await Posts.findOne({ _id: `${id}` })
     }
 }
 

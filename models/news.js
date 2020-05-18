@@ -9,4 +9,5 @@ const news = new mongoose.Schema({
     tags: [String]
 })
 
+news.index({tags: "text"})
 module.exports = mongoose.model('news', news)

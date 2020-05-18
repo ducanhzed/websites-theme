@@ -69,16 +69,20 @@ class WebsiteService {
             return null
         }
     }
+
+    findWebsiteByID = async (id) => {
+        return Websites.findById(`${id}`);
+    }
 }
 
 
-/* // main
+// main
 (async () => {
     await mongooseConnecting();
     let websiteService = new WebsiteService();
-    console.log(await websiteService.findWebsiteByPriceRange(5000000, 8000000))
+    console.log(await websiteService.findWebsiteByID('5ebe49f69a21cd22109282e4'))
 
     await mongoose.connection.close()
-})() */
+})()
 
-module.exports = WebsiteService
+//module.exports = WebsiteService
