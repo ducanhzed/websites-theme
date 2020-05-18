@@ -4,9 +4,6 @@ let titleToLink = require('../services/change_alias')
 
 mongoose.Promise = global.Promise;
 
-
-
-
 // Connect MongoDB at default port 27017.
 mongoose.connect('mongodb://localhost:27017/websiteTheme', {
     useNewUrlParser: true,
@@ -26,7 +23,8 @@ mongoose.connect('mongodb://localhost:27017/websiteTheme', {
                 content: ['Lorem ipsum dolor asit ect amec', `<img src="./image.png"></img>`, "This is a content", "This is another content"],
                 author: authors[Math.round(Math.random() * (authors.length - 1))],
                 points: [0],
-                tags: [countries[Math.round(Math.random() * (countries.length - 1))].toLowerCase(), colors[Math.round(Math.random() * (colors.length - 1))].toLowerCase()]
+                tags: [countries[Math.round(Math.random() * (countries.length - 1))].toLowerCase(), colors[Math.round(Math.random() * (colors.length - 1))].toLowerCase()],
+                keywords: [countries[Math.round(Math.random() * (countries.length - 1))].toLowerCase(), colors[Math.round(Math.random() * (colors.length - 1))].toLowerCase()],
             }
 
             seed['_id'] = titleToLink(seed.title)
