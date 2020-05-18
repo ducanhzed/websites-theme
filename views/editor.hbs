@@ -1,0 +1,102 @@
+{{!-- <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script> --}}
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;1,500&display=swap');
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background: salmon;
+        font-size: ;
+    }
+
+    h1 {
+        text-align: center;
+        margin: 20px auto;
+    }
+
+    #editorjs {
+        max-width: 1366px;
+        padding: 20px;
+        margin: auto;
+        background: rgb(255, 255, 255);
+        border: 2px solid rgb(30, 30, 30);
+        border-radius: 20px;
+        position: relative;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    #save-content {
+        margin: 30px auto;
+        line-height: 50px;
+        font-size: 20px;
+        padding: 5px 15px;
+        font-weight: 500;
+        font-family: sans-serif;
+        position: relative;
+        margin-left: 50%;
+        transform: translate(-50%, 0);
+    }
+</style>
+
+<script type="module" src="./static/editor.js"></script>
+<script type="module" src="./static/list.js"></script>
+<script type="module" src="./static/header.js"></script>
+<script type="module" src="./static/embed.js"></script>
+<script type="module" src="./static/image.js"></script>
+</head>
+
+<body>
+    <h1>Your content</h1>
+    <div id="editorjs"></div>
+    <button id="save-content">Save your content</button>
+
+    <script type="module">
+        document.addEventListener('DOMContentLoaded', (e) => {
+            //const ImageTool = window.ImageTool;
+            const editor = new EditorJS({
+                holderId: 'editorjs',
+                tools: {
+                    header: {
+                        shortcut: 'CTRL+SHIFT+H',
+                        class: Header,
+                        inlineToolbar: ['link', 'bold', 'italic']
+                    },
+                    list: {
+                        shortcut: 'CTRL+SHIFT+L',
+                        class: List,
+                        inlineToolbar: ['link', 'bold', 'italic']
+                    },
+                    embed: {
+                        class: Embed,
+                        inlineToolbar: false,
+                        config: {
+                            services: {
+                                youtube: true,
+                                coub: true
+                            }
+                        }
+                    },
+                    image: {
+                        class: ImageTool,
+                        config: {
+                            endpoints: {
+                                byFile: 'http://localhost:8008/uploadFile', // Your backend file uploader endpoint
+                                byUrl: 'http://localhost:8008/fetchUrl', // Your endpoint that provides uploading by Url
+                            }
+                        }
+                    }
+                }
+            });
+            const saveBtn = document.querySelector('#save-content');
+            saveBtn.addEventListener('click', async (e) => {
+                let res  = await editor.save()
+                console.log(res)
+            })
+        })
+
+    </script>
