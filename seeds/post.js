@@ -13,6 +13,7 @@ mongoose.connect(process.env.DB_URI || 'mongodb://localhost:27017/websiteTheme',
     autoIndex: true,
 }, async (err) => {
     if (!err) {
+        await Post.createCollection()
         console.log('MongoDB Connection Succeeded.')
         let authors = ['Jack Nathan', 'Đức Anh', 'Phước Nguyễn', 'Đăng Huy']
         for (let i = 0; i < 1000; i++) {

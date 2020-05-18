@@ -1,12 +1,14 @@
 const Websites = require('../models/websites')
 const mongoose = require('mongoose');
+const dotenv = require('dotenv')
 
+dotenv.config()
 mongoose.Promise = global.Promise;
 const WEB_PER_PAGE = 8;
 
 // Connect MongoDB at default port 27017.
 async function mongooseConnecting() {
-    mongoose.connect('mongodb://localhost:27017/websiteTheme', {
+    mongoose.connect(process.env.DB_URI || 'mongodb://localhost:27017/websiteTheme', {
         useNewUrlParser: true,
         useCreateIndex: true,
         useUnifiedTopology: true,

@@ -3,6 +3,7 @@ const dotenv = require('dotenv')
 const Website = require('../models/websites')
 const Posts = require('../models/posts')
 const Fields = require('../models/fields')
+const titleToID = require('../services/change_alias')
 
 mongoose.Promise = global.Promise
 dotenv.config()
@@ -26,9 +27,9 @@ mongoose.connect(process.env.DB_URI || 'mongodb://localhost:27017/websiteTheme',
         let authors = ['Jack Nathan', 'Đức Anh', 'Phước Nguyễn', 'Đăng Huy']
         let fields = await Fields.find({}).lean();
 
-        for (let i = 1; i <= 50; i++) {
+        for (let i = 1; i <= 500; i++) {
             let seed = {
-                name: `website ${Date.now()}`,
+                name: `website ${Date.now()} tiếng việt`,
                 images: ['img_1', 'img_2', 'img_3', 'img_4'],
                 color: colors[Math.round(Math.random() * (colors.length - 1))].toLocaleLowerCase(),
                 country: countries[Math.round(Math.random() * (countries.length - 1))].toLocaleLowerCase(),
@@ -37,11 +38,13 @@ mongoose.connect(process.env.DB_URI || 'mongodb://localhost:27017/websiteTheme',
                 author: authors[Math.round(Math.random() * (authors.length - 1))],
                 details: mongoose.Types.ObjectId(postIDs[Math.round(Math.random() * (postIDs.length - 1))])
             }
+
+            seed['_id'] = titleToID(seed.name)
             let website = new Website(seed)
             await website.save()
             console.log(` - data ${i} is saving... !`)
             console.log(`--------------${seed.field}----------------`)
-            await setTimeout(()=>{}, 200)
+            await setTimeout(() => { }, 200)
         }
         await mongoose.connection.close()
     } else {
