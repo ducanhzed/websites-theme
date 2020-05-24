@@ -5,6 +5,7 @@ const dotenv = require('dotenv')
 dotenv.config()
 mongoose.Promise = global.Promise;
 const WEB_PER_PAGE = 8;
+const WEB_PER_ROW = 4;
 
 // Connect MongoDB at default port 27017.
 async function mongooseConnecting() {
@@ -31,9 +32,11 @@ class WebsiteService {
         return numOfWebsites;
     }
 
-    findNewWebsite = async (num = 4) => {
+    findNewWebsite = async (num = 1) => {
+        await mongooseConnecting()
         const numOfWebsites = await this.countAllWebsite()
-        let websites = await Websites.find().skip(numOfWebsites - num).sort({ createdDate: 1 }).lean();
+        let websites = await Websites.find().skip(numOfWebsites - num * WEB_PER_ROW).limit(WEB_PER_ROW).sort({ createdDate: -1 }).lean();
+        await mongoose.connection.close()
         return websites.reverse()
     }
 
@@ -79,12 +82,12 @@ class WebsiteService {
 
 
 // main
-(async () => {
+/* (async () => {
     await mongooseConnecting();
     let websiteService = new WebsiteService();
     console.log(await websiteService.findWebsiteByID('5ebe49f69a21cd22109282e4'))
 
     await mongoose.connection.close()
-})()
+})() */
 
-//module.exports = WebsiteService
+module.exports = WebsiteService

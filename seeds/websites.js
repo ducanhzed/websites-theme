@@ -25,12 +25,17 @@ mongoose.connect(process.env.DB_URI || 'mongodb://localhost:27017/websiteTheme',
         let countries = ['Pháp', 'Mỹ', 'Tây Ban Nha', 'Bồ Đào Nha', 'Nhật Bản', 'Úc', 'Việt Nam', 'Trung Quốc']
         let colors = ['Đen', 'Đỏ', 'Lục', 'Lam', 'Tím', 'Vàng', 'Trắng', 'Chàm', 'Nâu', 'Cam']
         let authors = ['Jack Nathan', 'Đức Anh', 'Phước Nguyễn', 'Đăng Huy']
+        let images = ['./images/websites/img_1.jpg', './images/websites/img_2.jpg', './images/websites/img_3.jpg', './images/websites/img_4.jpg', './images/websites/img_5.png'];
         let fields = await Fields.find({}).lean();
 
-        for (let i = 1; i <= 500; i++) {
+        for (let i = 1; i <= 800; i++) {
             let seed = {
-                name: `website ${Date.now()} tiếng việt`,
-                images: ['img_1', 'img_2', 'img_3', 'img_4'],
+                name: `Website công nghệ demo`,
+                images: [
+                    images[Math.round(Math.random() * (images.length - 1))],
+                    images[Math.round(Math.random() * (images.length - 1))],
+                    images[Math.round(Math.random() * (images.length - 1))]
+                ],
                 color: colors[Math.round(Math.random() * (colors.length - 1))].toLocaleLowerCase(),
                 country: countries[Math.round(Math.random() * (countries.length - 1))].toLocaleLowerCase(),
                 field: fields[Math.round(Math.random() * (fields.length - 1))].name.toLocaleLowerCase(),
@@ -40,11 +45,15 @@ mongoose.connect(process.env.DB_URI || 'mongodb://localhost:27017/websiteTheme',
             }
 
             seed['_id'] = titleToID(seed.name)
+
+            let exist = await Website.findById(seed._id);
+            if (exist) seed._id += ` ${Date.now()}`;
+
             let website = new Website(seed)
             await website.save()
             console.log(` - data ${i} is saving... !`)
             console.log(`--------------${seed.field}----------------`)
-            await setTimeout(() => { }, 200)
+
         }
         await mongoose.connection.close()
     } else {

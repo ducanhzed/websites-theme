@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Field = require('../models/fields')
 const dotenv = require('dotenv')
-
+const change_alias = require('../services/change_alias')
 dotenv.config()
 
 const dataSet = ["thiết bị, dụng cụ",
@@ -45,9 +45,18 @@ mongoose.connect(process.env.DB_URI || 'mongodb://localhost:27017/websiteTheme',
 
         await Field.createCollection();
         for (let i in dataSet) {
-            let seed = new Field({ name: dataSet[i].toLowerCase() })
-            await seed.save()
-            console.log(dataSet[i] + ' is saved !')
+            let seed = ({ name: dataSet[i].toLowerCase() })
+            seed['_id'] = change_alias(seed.name)
+
+            try {
+                seed = new Field(seed)
+                await seed.save()
+                console.log(dataSet[i] + ' is saved !')
+            }
+            catch (err) {
+                console.log(' There was an error when trying to save this Field (duplicated)!')
+            }
+
         }
         await mongoose.connection.close()
     } else {

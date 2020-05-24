@@ -102,6 +102,7 @@
 
     <div id="main-content">
         <div class="hero">
+            {{#if newWebsites}}
             <div class="products-row">
                 <h3 class="title">Mới Nhất</h3>
                 <div class="title-divider">
@@ -176,210 +177,248 @@
                     </div>
                 </div>
                 <div class="products-grid">
+                    {{#each newWebsites}}
                     <div class="product">
                         <div class="product-card">
                             <div class="img-wrapper">
-                                <img class="image" src="./images/landing-1.png" alt="">
+                                <img class="image" src="{{images.[0]}}" alt="">
                             </div>
                             <div class="content">
-                                <h3 class="name">Landing Page For Business</h3>
+                                <h3 class="name">{{name}}</h3>
                                 <div class="row">
-                                    <span class="location f-left">From France</span>
-                                    <span class="date f-right">March 20, 2020</span>
+                                    <span class="location f-left">Quốc gia : {{country}}</span>
+                                    <span class="date f-right">{{#dd_mm_yyyy createdDate}}{{/dd_mm_yyyy}}</span>
                                 </div>
                                 <div class="row">
                                     <section class="author f-left">
                                         <div class="avatar">
                                         </div>
-                                        <span class="auth-name"><strong>Jack Nathan</strong></span>
+                                        <span class="auth-name"><strong>{{author}}</strong></span>
                                     </section>
                                     <div class="tags f-right">
                                         <div class="tag">Dev</div>
-                                        <div class="tag">Artist</div>
+                                        <div class="tag">{{color}}</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="product">
-                        <div class="product-card">
-                            <div class="img-wrapper">
-                                <img class="image" src="./images/gud-night-images.jpg" alt="">
-                            </div>
-                            <div class="content">
-                                <h3 class="name">Landing Page For Kids</h3>
-                                <div class="row">
-                                    <span class="location f-left">From USA</span>
-                                    <span class="date f-right">March 20, 2020</span>
-                                </div>
-                                <div class="row">
-                                    <section class="author f-left">
-                                        <div class="avatar">
-                                        </div>
-                                        <span class="auth-name"><strong>Jack Nathan</strong></span>
-                                    </section>
-                                    <div class="tags f-right">
-                                        <div class="tag">Dev</div>
-                                        <div class="tag">Artist</div>
-                                    </div>
-                                </div>
-                            </div>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if careWebsites}}
+            <div class="products-row">
+                <h3 class="title">Quan tâm nhất</h3>
+                <div class="title-divider">
+                    <div class="line"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="filter-row">
+                    <div class="filter-dropdown">
+                        <div class="title">
+                            XU HƯỚNG <i class="fas fa-caret-down"></i>
+                        </div>
+                        <div class="dropdown">
+                            <div class="dropdown-item">item-1</div>
+                            <div class="dropdown-item">item-2</div>
+                            <div class="dropdown-item">item-3</div>
+                            <div class="dropdown-item">item-4</div>
+                            <div class="dropdown-item">item-5</div>
+                            <div class="dropdown-item">item-6</div>
                         </div>
                     </div>
-                    <div class="product">
-                        <div class="product-card">
-                            <div class="img-wrapper">
-                                <img class="image" src="./images/nut-keu-goi-hanh-dong-hap-dan-tren-landing-page.png"
-                                    alt="">
-                            </div>
-                            <div class="content">
-                                <h3 class="name">Landing Page For Actions</h3>
-                                <div class="row">
-                                    <span class="location f-left">From Korea</span>
-                                    <span class="date f-right">April 15, 2020</span>
-                                </div>
-                                <div class="row">
-                                    <section class="author f-left">
-                                        <div class="avatar">
-                                        </div>
-                                        <span class="auth-name"><strong>Duy Tran</strong></span>
-                                    </section>
-                                    <div class="tags f-right">
-                                        <div class="tag">Dev</div>
-                                        <div class="tag">Swift</div>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="filter-dropdown">
+                        <div class="title">
+                            LÃNH VỰC <i class="fas fa-caret-down"></i>
+                        </div>
+                        <div class="dropdown">
+                            <div class="dropdown-item">item-1</div>
+                            <div class="dropdown-item">item-2</div>
+                            <div class="dropdown-item">item-3</div>
+                            <div class="dropdown-item">item-4</div>
+                            <div class="dropdown-item">item-5</div>
+                            <div class="dropdown-item">item-6</div>
                         </div>
                     </div>
-                    <div class="product">
-                        <div class="product-card">
-                            <div class="img-wrapper">
-                                <img class="image" src="./images/landing-page-la-gi.jpg" alt="">
-                            </div>
-                            <div class="content">
-                                <h3 class="name">Landing Page For Newbie</h3>
-                                <div class="row">
-                                    <span class="location f-left">From Philippines</span>
-                                    <span class="date f-right">March 20, 2020</span>
-                                </div>
-                                <div class="row">
-                                    <section class="author f-left">
-                                        <div class="avatar">
-                                        </div>
-                                        <span class="auth-name"><strong>Phuoc Nguyen</strong></span>
-                                    </section>
-                                    <div class="tags f-right">
-                                        <div class="tag">Angular</div>
-                                        <div class="tag">Python</div>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="filter-dropdown">
+                        <div class="title">
+                            MÀU SẮC <i class="fas fa-caret-down"></i>
+                        </div>
+                        <div class="dropdown">
+                            <div class="dropdown-item">item-1</div>
+                            <div class="dropdown-item">item-2</div>
+                            <div class="dropdown-item">item-3</div>
+                            <div class="dropdown-item">item-4</div>
+                            <div class="dropdown-item">item-5</div>
+                            <div class="dropdown-item">item-6</div>
                         </div>
                     </div>
-                    <div class="product">
-                        <div class="product-card">
-                            <div class="img-wrapper">
-                                <img class="image" src="./images/landing-1.png" alt="">
-                            </div>
-                            <div class="content">
-                                <h3 class="name">Landing Page For Business</h3>
-                                <div class="row">
-                                    <span class="location f-left">From France</span>
-                                    <span class="date f-right">March 20, 2020</span>
-                                </div>
-                                <div class="row">
-                                    <section class="author f-left">
-                                        <div class="avatar">
-                                        </div>
-                                        <span class="auth-name"><strong>Jack Nathan</strong></span>
-                                    </section>
-                                    <div class="tags f-right">
-                                        <div class="tag">Dev</div>
-                                        <div class="tag">Artist</div>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="filter-dropdown">
+                        <div class="title">
+                            SỐ LƯỢNG CỘT <i class="fas fa-caret-down"></i>
+                        </div>
+                        <div class="dropdown">
+                            <div class="dropdown-item">item-1</div>
+                            <div class="dropdown-item">item-2</div>
+                            <div class="dropdown-item">item-3</div>
+                            <div class="dropdown-item">item-4</div>
+                            <div class="dropdown-item">item-5</div>
+                            <div class="dropdown-item">item-6</div>
                         </div>
                     </div>
-                    <div class="product">
-                        <div class="product-card">
-                            <div class="img-wrapper">
-                                <img class="image" src="./images/gud-night-images.jpg" alt="">
-                            </div>
-                            <div class="content">
-                                <h3 class="name">Landing Page For Kids</h3>
-                                <div class="row">
-                                    <span class="location f-left">From USA</span>
-                                    <span class="date f-right">March 20, 2020</span>
-                                </div>
-                                <div class="row">
-                                    <section class="author f-left">
-                                        <div class="avatar">
-                                        </div>
-                                        <span class="auth-name"><strong>Jack Nathan</strong></span>
-                                    </section>
-                                    <div class="tags f-right">
-                                        <div class="tag">Dev</div>
-                                        <div class="tag">Artist</div>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="filter-dropdown">
+                        <div class="title">
+                            ĐẤT NƯỚC <i class="fas fa-caret-down"></i>
                         </div>
-                    </div>
-                    <div class="product">
-                        <div class="product-card">
-                            <div class="img-wrapper">
-                                <img class="image" src="./images/nut-keu-goi-hanh-dong-hap-dan-tren-landing-page.png"
-                                    alt="">
-                            </div>
-                            <div class="content">
-                                <h3 class="name">Landing Page For Actions</h3>
-                                <div class="row">
-                                    <span class="location f-left">From Korea</span>
-                                    <span class="date f-right">April 15, 2020</span>
-                                </div>
-                                <div class="row">
-                                    <section class="author f-left">
-                                        <div class="avatar">
-                                        </div>
-                                        <span class="auth-name"><strong>Duy Tran</strong></span>
-                                    </section>
-                                    <div class="tags f-right">
-                                        <div class="tag">Dev</div>
-                                        <div class="tag">Swift</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product">
-                        <div class="product-card">
-                            <div class="img-wrapper">
-                                <img class="image" src="./images/landing-page-la-gi.jpg" alt="">
-                            </div>
-                            <div class="content">
-                                <h3 class="name">Landing Page For Newbie</h3>
-                                <div class="row">
-                                    <span class="location f-left">From Philippines</span>
-                                    <span class="date f-right">March 20, 2020</span>
-                                </div>
-                                <div class="row">
-                                    <section class="author f-left">
-                                        <div class="avatar">
-                                        </div>
-                                        <span class="auth-name"><strong>Phuoc Nguyen</strong></span>
-                                    </section>
-                                    <div class="tags f-right">
-                                        <div class="tag">Angular</div>
-                                        <div class="tag">Python</div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="dropdown">
+                            <div class="dropdown-item">item-1</div>
+                            <div class="dropdown-item">item-2</div>
+                            <div class="dropdown-item">item-3</div>
+                            <div class="dropdown-item">item-4</div>
+                            <div class="dropdown-item">item-5</div>
+                            <div class="dropdown-item">item-6</div>
                         </div>
                     </div>
                 </div>
+                <div class="products-grid">
+                    {{#each careWebsites}}
+                    <div class="product">
+                        <div class="product-card">
+                            <div class="img-wrapper">
+                                <img class="image" src="{{images.[0]}}" alt="">
+                            </div>
+                            <div class="content">
+                                <h3 class="name">{{name}}</h3>
+                                <div class="row">
+                                    <span class="location f-left">Quốc gia : {{country}}</span>
+                                    <span class="date f-right">{{#dd_mm_yyyy createdDate}}{{/dd_mm_yyyy}}</span>
+                                </div>
+                                <div class="row">
+                                    <section class="author f-left">
+                                        <div class="avatar">
+                                        </div>
+                                        <span class="auth-name"><strong>{{author}}</strong></span>
+                                    </section>
+                                    <div class="tags f-right">
+                                        <div class="tag">Dev</div>
+                                        <div class="tag">{{color}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
             </div>
+            {{/if}}
+
+              {{#if worldWebsites}}
+            <div class="products-row">
+                <h3 class="title">Quan tâm nhất</h3>
+                <div class="title-divider">
+                    <div class="line"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="filter-row">
+                    <div class="filter-dropdown">
+                        <div class="title">
+                            XU HƯỚNG <i class="fas fa-caret-down"></i>
+                        </div>
+                        <div class="dropdown">
+                            <div class="dropdown-item">item-1</div>
+                            <div class="dropdown-item">item-2</div>
+                            <div class="dropdown-item">item-3</div>
+                            <div class="dropdown-item">item-4</div>
+                            <div class="dropdown-item">item-5</div>
+                            <div class="dropdown-item">item-6</div>
+                        </div>
+                    </div>
+                    <div class="filter-dropdown">
+                        <div class="title">
+                            LÃNH VỰC <i class="fas fa-caret-down"></i>
+                        </div>
+                        <div class="dropdown">
+                            <div class="dropdown-item">item-1</div>
+                            <div class="dropdown-item">item-2</div>
+                            <div class="dropdown-item">item-3</div>
+                            <div class="dropdown-item">item-4</div>
+                            <div class="dropdown-item">item-5</div>
+                            <div class="dropdown-item">item-6</div>
+                        </div>
+                    </div>
+                    <div class="filter-dropdown">
+                        <div class="title">
+                            MÀU SẮC <i class="fas fa-caret-down"></i>
+                        </div>
+                        <div class="dropdown">
+                            <div class="dropdown-item">item-1</div>
+                            <div class="dropdown-item">item-2</div>
+                            <div class="dropdown-item">item-3</div>
+                            <div class="dropdown-item">item-4</div>
+                            <div class="dropdown-item">item-5</div>
+                            <div class="dropdown-item">item-6</div>
+                        </div>
+                    </div>
+                    <div class="filter-dropdown">
+                        <div class="title">
+                            SỐ LƯỢNG CỘT <i class="fas fa-caret-down"></i>
+                        </div>
+                        <div class="dropdown">
+                            <div class="dropdown-item">item-1</div>
+                            <div class="dropdown-item">item-2</div>
+                            <div class="dropdown-item">item-3</div>
+                            <div class="dropdown-item">item-4</div>
+                            <div class="dropdown-item">item-5</div>
+                            <div class="dropdown-item">item-6</div>
+                        </div>
+                    </div>
+                    <div class="filter-dropdown">
+                        <div class="title">
+                            ĐẤT NƯỚC <i class="fas fa-caret-down"></i>
+                        </div>
+                        <div class="dropdown">
+                            <div class="dropdown-item">item-1</div>
+                            <div class="dropdown-item">item-2</div>
+                            <div class="dropdown-item">item-3</div>
+                            <div class="dropdown-item">item-4</div>
+                            <div class="dropdown-item">item-5</div>
+                            <div class="dropdown-item">item-6</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="products-grid">
+                    {{#each worldWebsites}}
+                    <div class="product">
+                        <div class="product-card">
+                            <div class="img-wrapper">
+                                <img class="image" src="{{images.[0]}}" alt="">
+                            </div>
+                            <div class="content">
+                                <h3 class="name">{{name}}</h3>
+                                <div class="row">
+                                    <span class="location f-left">Quốc gia : {{country}}</span>
+                                    <span class="date f-right">{{#dd_mm_yyyy createdDate}}{{/dd_mm_yyyy}}</span>
+                                </div>
+                                <div class="row">
+                                    <section class="author f-left">
+                                        <div class="avatar">
+                                        </div>
+                                        <span class="auth-name"><strong>{{author}}</strong></span>
+                                    </section>
+                                    <div class="tags f-right">
+                                        <div class="tag">Dev</div>
+                                        <div class="tag">Artist</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
         </div>
 
         <!-- CUSTOMER REVIEW -->
@@ -624,7 +663,7 @@
                                 <h3 class="name">Transformer Website Style</h3>
                                 <div class="row">
                                     <span class="category f-left">Movie Trending</span>
-                                    <span class="date f-right">March 20, 2020</span>
+                                    <span class="date f-right">{{#dd_mm_yyyy createdDate}}{{/dd_mm_yyyy}}</span>
                                 </div>
                                 <div class="row">
                                     <section class="author f-left">
@@ -711,7 +750,7 @@
                                 <h3 class="name">Transformer Website Style</h3>
                                 <div class="row">
                                     <span class="category f-left">Movie Trending</span>
-                                    <span class="date f-right">March 20, 2020</span>
+                                    <span class="date f-right">{{#dd_mm_yyyy createdDate}}{{/dd_mm_yyyy}}</span>
                                 </div>
                                 <div class="row">
                                     <section class="author f-left">
