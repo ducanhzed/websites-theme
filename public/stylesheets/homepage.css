@@ -14,12 +14,12 @@
   z-index: -100;
 }
 
+/*PRODUCTS ROW*/
 .hero .products-row {
   /*background: rgb(195, 205, 216);*/
   width: 95%;
   max-width: 1480px;
-  margin: 50px auto;
-  margin-top: 100px;
+  margin: auto;
   position: relative;
   font-size: 13px;
   z-index: 2;
@@ -147,6 +147,8 @@
   transition-duration: 0.3s;
   transition-timing-function: ease-in;
   cursor: pointer;
+  color: black;
+  text-decoration: none;
 }
 .hero .products-row .products-grid .product:hover {
   border: none;
@@ -247,7 +249,6 @@
   > .content
   .row
   .f-left {
-  text-transform: capitalize;
   float: left;
   margin-left: 10px;
 }
@@ -271,9 +272,20 @@
   .product-card
   > .content
   .row
-  .tags {
+  .keywords {
   display: flex;
   color: white;
+}
+
+.hero
+  .products-row
+  .products-grid.news
+  .product
+  .product-card
+  > .content
+  > .row
+  > .tags {
+  text-transform: capitalize;
 }
 
 .hero
@@ -282,15 +294,33 @@
   .product
   .product-card
   > .content
+  > .row
+  > .field span{
+    padding: 2px 5px;
+    border-radius: 5px;
+    background: rgb(0, 155, 21);
+    line-height: normal;
+    text-transform: capitalize;
+    color: whitesmoke;
+}
+
+.hero
+  .products-row
+  .products-grid.news
+  .product
+  .product-card
+  > .content
   .row
-  .tags
-  .tag {
+  .keywords
+  .keyword {
   margin: 3px;
   padding: 2px 3px;
   border-radius: 5px;
   background: rgb(0, 155, 21);
   line-height: normal;
+  text-transform: capitalize;
 }
+/*END PRODUCTS ROW*/
 /* END HERO */
 
 /* CUSTOMER REVIEW */
@@ -647,11 +677,34 @@
   .hero .products-row .products-grid {
     grid-auto-rows: 300px;
   }
+
+  .website-theme-list-wrapper {
+    padding: 20px 5px;
+  }
   .website-theme-list-wrapper > .line {
     display: none !important;
   }
+
   .website-theme-list-wrapper > .title {
-    font-size: 20px;
+    line-height: normal;
+    text-align: center;
+    font-size: 1em;
+    margin-bottom: 10px;
   }
-  /*HERO END*/
+
+  .website-theme-list-wrapper > .list {
+    display: flex;
+    justify-content: left;
+    align-items: flex-start;
+    flex-direction: column;
+    max-width: 100vh;
+    list-style-type: disc;
+    width: 95%;
+    padding: 20px 5px;
+  }
+  .website-theme-list-wrapper > .list > .list-item {
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }
+    /*HERO END*/
 }

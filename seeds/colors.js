@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Color = require('../models/colors')
+const change_alias = require('../services/change_alias')
 const dotenv = require('dotenv')
 dotenv.config()
 
@@ -18,8 +19,10 @@ mongoose.connect(process.env.DB_URI || 'mongodb://localhost:27017/websiteTheme',
         console.log('MongoDB Connection Succeeded.')
         let colors = ['Đen', 'Đỏ', 'Lục', 'Lam', 'Tím', 'Vàng', 'Trắng', 'Chàm', 'Nâu', 'Cam']
         for (let i = 0; i < colors.length; i++) {
+            const name = `${colors[i].toLowerCase()}`;
             let data = new Color({
-                name: `${colors[i].toLowerCase()}`,
+                name: name,
+                _id: change_alias(name),
                 quantity: 0
             })
             await data.save()

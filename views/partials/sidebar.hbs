@@ -1,0 +1,62 @@
+<div id="main-menu" class="sidebar">
+    <i id="close-btn" class="fas fa-times"></i>
+    {{#if menu.trends}}
+    <div class="category">
+        <div class="title">Xu hướng<i class="fas fa-caret-down"></i></div>
+        <div class="dropdown">
+            {{#each menu.trends}}
+            <a href="/danh-muc-websites?trend={{this.name}}" class="dropdown-item">{{this.name}}</a>
+            {{/each}}
+        </div>
+    </div>
+    {{/if}}
+
+    {{#if menu.fields}}
+    <div class="category">
+        <div class="title">Lĩnh vực<i class="fas fa-caret-down"></i></div>
+        <div class="dropdown">
+            {{#each menu.fields}}
+            <a href="/danh-muc-websites?field={{this.name}}" class="dropdown-item">{{this.name}}</a>
+            {{/each}}
+        </div>
+    </div>
+    {{/if}}
+
+    {{#if menu.colors}}
+    <div class="category">
+        <div class="title">Màu sắc<i class="fas fa-caret-down"></i></div>
+        <div class="dropdown">
+            {{#each menu.colors}}
+            <a href="/danh-muc-websites?color={{this.name}}" class="dropdown-item">{{this.name}}</a>
+            {{/each}}
+        </div>
+    </div>
+    {{/if}}
+
+    
+    {{#if menu.cols}}
+    <div class="category">
+        <div class="title">Số lượng cột<i class="fas fa-caret-down"></i></div>
+        <div class="dropdown">
+            {{#each menu.cols}}
+            <a href="/danh-muc-websites?numOfCols={{this}}" class="dropdown-item">{{this}}</a>
+            {{/each}}
+        </div>
+    </div>
+    {{/if}}
+
+    {{#if menu.countries}}
+    <div class="category">
+        <div class="title">Đất Nước<i class="fas fa-caret-down"></i></div>
+        <div class="dropdown">
+            {{#each menu.countries}}
+            <a href="/danh-muc-websites?country={{this.name}}" class="dropdown-item">{{this.name}}</a>
+            {{/each}}
+        </div>
+    </div>
+    {{/if}}
+    <div class="category">
+        <a href="/tin-tuc" style="text-decoration: none; color: black" class="title">Tin tức</i></a>
+    </div>
+</div>
+<div class="overlay"></div>

@@ -29,17 +29,23 @@ class NewsService {
     }
 
     findNewsbyTagsOrKeywords = async (stringOfText, skip = 0, limit = 8) => {
-        return News.find({$text: { $search: `${stringOfText}`}}).skip(skip).limit(limit).sort({createdDate: -1}).lean()
+        return News.find({ '$text': { $search: `${stringOfText}` } }).skip(skip).limit(limit).sort({ createdDate: -1 }).lean()
     }
 
     findNewsByID = async (id) => {
-        return News.findOne({_id: `${id}`})
+        return News.findOne({ _id: `${id}` })
+    }
+
+    count = async () => {
+        return News.countDocuments()
     }
 }
-// main
+/* // main
 (async () => {
     await mongooseConnecting()
     let newsService = new NewsService();
     console.log(await newsService.findNewsByID('5ec2c56df6c08747a8477f1c'))
     await mongoose.connection.close();
-})()
+})() */
+
+module.exports = NewsService

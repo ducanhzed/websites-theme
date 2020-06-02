@@ -8,7 +8,8 @@ const news = new mongoose.Schema({
     createdDate: {type: Date, default: new Date, required: true},
     points: [{type: Number, require: true, default: 0}],
     tags: [String],
-    keywords: [String]
+    keywords: [String],
+    avatar: {type: String, require: true, default: './images/news/no-image.jpg'}
 })
 
 news.index({'$**': "text"})

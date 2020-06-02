@@ -7,7 +7,7 @@ const website = new mongoose.Schema({
     images: [{ type: String, required: true }, { type: String, required: true }, { type: String, required: true }],
     author: { type: String, required: true },
     field: { type: String, required: true },
-    details: { type: mongoose.Types.ObjectId, require: true },
+    details: { type: mongoose.Types.ObjectId, require: true }, // post model
     country: { type: String, required: true },
     color: { type: String, required: true },
     price: { type: Number, min: 0, required: true },

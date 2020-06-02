@@ -17,14 +17,16 @@ mongoose.connect(process.env.DB_URI || 'mongodb://localhost:27017/websiteTheme',
     await Country.createCollection()
     if (!err) {
         console.log('MongoDB Connection Succeeded.')
-        let countries = ['Pháp', 'Mỹ', 'Tây Ban Nha', 'Bồ Đào Nha', 'Nhật Bản', 'Úc', 'Việt Nam', 'Trung Quốc']
+        let countries = ['Pháp', 'Mỹ', 'Tây Ban Nha', 'Bồ Đào Nha', 'Nhật Bản', 'Úc', 'Việt Nam', 'Trung Quốc', 'Hàn Quốc', 'Ý']
         for (let i = 0; i < countries.length; i++) {
+            const name = `${countries[i].toLowerCase()}`
             let data = new Country({
-                name: `${countries[i].toLowerCase()}`,
+                name: name,
+                _id: change_alias(name),
                 quantity: 0
             })
             await data.save()
-            console.log('-' + countries[i] + 'is saved !')
+            console.log('-' + countries[i] + ' is saved !')
         }
         await mongoose.connection.close()
     } else {

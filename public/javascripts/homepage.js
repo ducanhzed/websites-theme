@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     filterDropdowns.forEach(e => {
-        console.log(e)
         e.addEventListener('mouseenter', function (e) {
             let dropdown = this.querySelector('.dropdown')
             dropdown.style.left = `${-this.offsetLeft}px`

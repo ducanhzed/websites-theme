@@ -150,6 +150,8 @@
   transition-duration: 0.3s;
   transition-timing-function: ease-in;
   cursor: pointer;
+  color: black;
+  text-decoration: none;
 }
 .hero .products-row .products-grid .product:hover {
   border: none;
@@ -292,6 +294,10 @@
   border-radius: 5px;
   background: rgb(0, 155, 21);
   line-height: normal;
+}
+
+.hero .products-row .products-grid.news .tag {
+  text-transform: capitalize;
 }
 /*END PRODUCTS ROW*/
 

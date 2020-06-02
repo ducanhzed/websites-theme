@@ -5,103 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
-    <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+    <link rel="shortcut icon" type="image/png" href="favicon.png" />
     <link
         href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,600;1,100;1,300&display=swap"
         rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <link rel="stylesheet" href="./stylesheets/main.css">
-    <link rel="stylesheet" href="./stylesheets/homepage.css">
+    <script src="/javascripts/fontawsome5/js/all.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <link rel="stylesheet" href="/stylesheets/homepage.css">
 </head>
 
 <body>
     <!--- MAIN HEADER --->
-    <header id="main-header">
-        <nav id="header-top">
-            <span class='title'>Follow us</span>
-            <a href="#" class="social-link">Twitter</a>
-            <a href="#" class="social-link">Facebook</a>
-            <a href="#" class="social-link">Youtube</a>
-            <a href="#" class="social-link">Instargram</a>
-            <a href="#" class="social-link">Linkedin</a>
-
-            <a href="#" class="social-link-icon"><i class="fab fa-facebook"></i></a>
-            <a href="#" class="social-link-icon"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="social-link-icon"><i class="fab fa-youtube"></i></a>
-            <a href="#" class="social-link-icon"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social-link-icon"><i class="fab fa-linkedin"></i></a>
-        </nav>
-        <nav id="header-mid">
-            <div id="categories-btn" class="border-br-lightgray">
-                <div class="burger-btn">
-                    <div class="line"></div>
-                    <div class="line"></div>
-                    <div class="line"></div>
-                </div>
-                <span>Danh Mục</span>
-            </div>
-
-            <i class="fas fa-search"></i>
-            <h1 id="web-title">Kumop</h1>
-            <div id="contact-btn">
-                LIÊN HỆ
-            </div>
-        </nav>
-    </header>
+    {{> header}}
     <!--- END MAIN HEADER --->
 
-    <div id="main-menu" class="sidebar">
-        <i id="close-btn" class="fas fa-times"></i>
-        <div class="category">
-            <div class="title">Xu hướng<i class="fas fa-caret-down"></i></div>
-            <div class="dropdown">
-                <div class="dropdown-item">item - 1</div>
-                <div class="dropdown-item">item - 2</div>
-                <div class="dropdown-item">item - 3</div>
-                <div class="dropdown-item">item - 4</div>
-            </div>
-        </div>
-        <div class="category">
-            <div class="title">Lãnh vực<i class="fas fa-caret-down"></i></div>
-            <div class="dropdown">
-                <div class="dropdown-item">item - 1</div>
-                <div class="dropdown-item">item - 2</div>
-                <div class="dropdown-item">item - 3</div>
-                <div class="dropdown-item">item - 4</div>
-            </div>
-        </div>        <div class="category">
-            <div class="title">Số Lượng cột<i class="fas fa-caret-down"></i></div>
-            <div class="dropdown">
-                <div class="dropdown-item">item - 1</div>
-                <div class="dropdown-item">item - 2</div>
-                <div class="dropdown-item">item - 3</div>
-                <div class="dropdown-item">item - 4</div>
-            </div>
-        </div>
-        <div class="category">
-            <div class="title">Đất nước<i class="fas fa-caret-down"></i></div>
-            <div class="dropdown">
-                <div class="dropdown-item">item - 1</div>
-                <div class="dropdown-item">item - 2</div>
-                <div class="dropdown-item">item - 3</div>
-                <div class="dropdown-item">item - 4</div>
-            </div>
-        </div>
-        <div class="category">
-            <div class="title">Tin tức<i class="fas fa-caret-down"></i></div>
-            <div class="dropdown">
-                <div class="dropdown-item">item - 1</div>
-                <div class="dropdown-item">item - 2</div>
-                <div class="dropdown-item">item - 3</div>
-                <div class="dropdown-item">item - 4</div>
-            </div>
-        </div>
-    </div>
-    <div class="overlay"></div>
+    <!-- SIDEBAR -->
+    {{> sidebar}}
+    <!-- END SIDEBAR -->
 
-
+    <!-- MAIN CONTENT -->
     <div id="main-content">
         <div class="hero">
+            {{#if newWebsites}}
             <div class="products-row">
                 <h3 class="title">Mới Nhất</h3>
                 <div class="title-divider">
@@ -176,375 +101,44 @@
                     </div>
                 </div>
                 <div class="products-grid">
-                    <div class="product">
+                    {{#each newWebsites}}
+                    <a class="product" href="/websites/{{_id}}">
                         <div class="product-card">
                             <div class="img-wrapper">
-                                <img class="image" src="./images/landing-1.png" alt="">
+                                <img class="image" src="{{images.[0]}}" alt="">
                             </div>
                             <div class="content">
-                                <h3 class="name">Landing Page For Business</h3>
+                                <h3 class="name">{{name}}</h3>
                                 <div class="row">
-                                    <span class="location f-left">From France</span>
-                                    <span class="date f-right">March 20, 2020</span>
+                                    <span class="location f-left" style="text-transform: capitalize;">Quốc gia :
+                                        {{country}}</span>
+                                    <span class="date f-right">{{#dd_mm_yyyy createdDate}}{{/dd_mm_yyyy}}</span>
                                 </div>
                                 <div class="row">
                                     <section class="author f-left">
                                         <div class="avatar">
                                         </div>
-                                        <span class="auth-name"><strong>Jack Nathan</strong></span>
+                                        <span class="auth-name"><strong>{{author}}</strong></span>
                                     </section>
-                                    <div class="tags f-right">
-                                        <div class="tag">Dev</div>
-                                        <div class="tag">Artist</div>
+                                    <div class="field f-right">
+                                        <span>{{field}}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="product">
-                        <div class="product-card">
-                            <div class="img-wrapper">
-                                <img class="image" src="./images/gud-night-images.jpg" alt="">
-                            </div>
-                            <div class="content">
-                                <h3 class="name">Landing Page For Kids</h3>
-                                <div class="row">
-                                    <span class="location f-left">From USA</span>
-                                    <span class="date f-right">March 20, 2020</span>
-                                </div>
-                                <div class="row">
-                                    <section class="author f-left">
-                                        <div class="avatar">
-                                        </div>
-                                        <span class="auth-name"><strong>Jack Nathan</strong></span>
-                                    </section>
-                                    <div class="tags f-right">
-                                        <div class="tag">Dev</div>
-                                        <div class="tag">Artist</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product">
-                        <div class="product-card">
-                            <div class="img-wrapper">
-                                <img class="image" src="./images/nut-keu-goi-hanh-dong-hap-dan-tren-landing-page.png"
-                                    alt="">
-                            </div>
-                            <div class="content">
-                                <h3 class="name">Landing Page For Actions</h3>
-                                <div class="row">
-                                    <span class="location f-left">From Korea</span>
-                                    <span class="date f-right">April 15, 2020</span>
-                                </div>
-                                <div class="row">
-                                    <section class="author f-left">
-                                        <div class="avatar">
-                                        </div>
-                                        <span class="auth-name"><strong>Duy Tran</strong></span>
-                                    </section>
-                                    <div class="tags f-right">
-                                        <div class="tag">Dev</div>
-                                        <div class="tag">Swift</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product">
-                        <div class="product-card">
-                            <div class="img-wrapper">
-                                <img class="image" src="./images/landing-page-la-gi.jpg" alt="">
-                            </div>
-                            <div class="content">
-                                <h3 class="name">Landing Page For Newbie</h3>
-                                <div class="row">
-                                    <span class="location f-left">From Philippines</span>
-                                    <span class="date f-right">March 20, 2020</span>
-                                </div>
-                                <div class="row">
-                                    <section class="author f-left">
-                                        <div class="avatar">
-                                        </div>
-                                        <span class="auth-name"><strong>Phuoc Nguyen</strong></span>
-                                    </section>
-                                    <div class="tags f-right">
-                                        <div class="tag">Angular</div>
-                                        <div class="tag">Python</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product">
-                        <div class="product-card">
-                            <div class="img-wrapper">
-                                <img class="image" src="./images/landing-1.png" alt="">
-                            </div>
-                            <div class="content">
-                                <h3 class="name">Landing Page For Business</h3>
-                                <div class="row">
-                                    <span class="location f-left">From France</span>
-                                    <span class="date f-right">March 20, 2020</span>
-                                </div>
-                                <div class="row">
-                                    <section class="author f-left">
-                                        <div class="avatar">
-                                        </div>
-                                        <span class="auth-name"><strong>Jack Nathan</strong></span>
-                                    </section>
-                                    <div class="tags f-right">
-                                        <div class="tag">Dev</div>
-                                        <div class="tag">Artist</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product">
-                        <div class="product-card">
-                            <div class="img-wrapper">
-                                <img class="image" src="./images/gud-night-images.jpg" alt="">
-                            </div>
-                            <div class="content">
-                                <h3 class="name">Landing Page For Kids</h3>
-                                <div class="row">
-                                    <span class="location f-left">From USA</span>
-                                    <span class="date f-right">March 20, 2020</span>
-                                </div>
-                                <div class="row">
-                                    <section class="author f-left">
-                                        <div class="avatar">
-                                        </div>
-                                        <span class="auth-name"><strong>Jack Nathan</strong></span>
-                                    </section>
-                                    <div class="tags f-right">
-                                        <div class="tag">Dev</div>
-                                        <div class="tag">Artist</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product">
-                        <div class="product-card">
-                            <div class="img-wrapper">
-                                <img class="image" src="./images/nut-keu-goi-hanh-dong-hap-dan-tren-landing-page.png"
-                                    alt="">
-                            </div>
-                            <div class="content">
-                                <h3 class="name">Landing Page For Actions</h3>
-                                <div class="row">
-                                    <span class="location f-left">From Korea</span>
-                                    <span class="date f-right">April 15, 2020</span>
-                                </div>
-                                <div class="row">
-                                    <section class="author f-left">
-                                        <div class="avatar">
-                                        </div>
-                                        <span class="auth-name"><strong>Duy Tran</strong></span>
-                                    </section>
-                                    <div class="tags f-right">
-                                        <div class="tag">Dev</div>
-                                        <div class="tag">Swift</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product">
-                        <div class="product-card">
-                            <div class="img-wrapper">
-                                <img class="image" src="./images/landing-page-la-gi.jpg" alt="">
-                            </div>
-                            <div class="content">
-                                <h3 class="name">Landing Page For Newbie</h3>
-                                <div class="row">
-                                    <span class="location f-left">From Philippines</span>
-                                    <span class="date f-right">March 20, 2020</span>
-                                </div>
-                                <div class="row">
-                                    <section class="author f-left">
-                                        <div class="avatar">
-                                        </div>
-                                        <span class="auth-name"><strong>Phuoc Nguyen</strong></span>
-                                    </section>
-                                    <div class="tags f-right">
-                                        <div class="tag">Angular</div>
-                                        <div class="tag">Python</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </a>
+                    {{/each}}
                 </div>
             </div>
-        </div>
+            {{/if}}
 
-        <!-- CUSTOMER REVIEW -->
-        <div class="customer-review">
-            <h2 class="title">Cảm Nhận Khách Hàng</h2>
-            <div class="line">
-            </div>
-            <div class="customer-row">
-                <a href="#" class="customer-card">
-                    <figure class="avatar">
-                        <img src="./images//therock.jpg" alt="">
-                    </figure>
-                    <div class="info">
-                        <div class="quotes">
-                            <img src="./images/icons8-quote-left-50.png" alt="" srcset="">
-                        </div>
-                        <div class="content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer consectetur nulla
-                                augue. Aliquam id congue est. Mauris pulvinar erat quis purus fringilla, in eleifend leo
-                                lobortis.
-                            </p>
-                        </div>
-                        <div class="line"></div>
-                        <div class="customer">
-                            <div class="name"><strong>Trần Tiến Đức Anh</strong></div>
-                            <div class="hometown">Hồ Chí Minh</div>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="customer-card">
-                    <figure class="avatar">
-                        <img src="./images//therock.jpg" alt="">
-                    </figure>
-                    <div class="info">
-                        <div class="quotes">
-                            <img src="./images/icons8-quote-left-50.png" alt="" srcset="">
-                        </div>
-                        <div class="content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer consectetur nulla
-                                augue. Aliquam id congue est. Mauris pulvinar erat quis purus fringilla, in eleifend leo
-                                lobortis.
-                                In
-                            </p>
-                        </div>
-                        <div class="line"></div>
-                        <div class="customer">
-                            <div class="name"><strong>Trần Tiến Đức Anh</strong></div>
-                            <div class="hometown">Hồ Chí Minh</div>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="customer-card">
-                    <figure class="avatar">
-                        <img src="./images//therock.jpg" alt="">
-                    </figure>
-                    <div class="info">
-                        <div class="quotes">
-                            <img src="./images/icons8-quote-left-50.png" alt="" srcset="">
-                        </div>
-                        <div class="content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer consectetur nulla
-                                augue. Aliquam id congue est.
-                            </p>
-                        </div>
-                        <div class="line"></div>
-                        <div class="customer">
-                            <div class="name"><strong>Trần Tiến Đức Anh</strong></div>
-                            <div class="hometown">Hồ Chí Minh</div>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="customer-card">
-                    <figure class="avatar">
-                        <img src="./images//therock.jpg" alt="">
-                    </figure>
-                    <div class="info">
-                        <div class="quotes">
-                            <img src="./images/icons8-quote-left-50.png" alt="" srcset="">
-                        </div>
-                        <div class="content">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer consectetur nulla
-                                augue. Aliquam id congue est. Mauris pulvinar erat quis purus fringilla, in eleifend leo
-                                lobortis.
-                                In
-                            </p>
-                        </div>
-                        <div class="line"></div>
-                        <div class="customer">
-                            <div class="name"><strong>Trần Tiến Đức Anh</strong></div>
-                            <div class="hometown">Hồ Chí Minh</div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <!-- END CUSTOMER REVIEW -->
-
-        <!-- CUSTOMER QUESTIONS -->
-        <div class="customer-questions">
-            <div class="title">Câu hỏi khách hàng thường gặp</div>
-            <div class="line">
-                <div class="box"></div>
-            </div>
-            <section class="question">Tôi có mất thêm chi phí sau khi thiết kế website không ? Website sau này có thể
-                nâng
-                câp không ?</section>
-            <section class="question">Tôi có website cũ, tôi muốn chuyển dữ liệu bài viết, hình ảnh,... qua website mới
-                này
-                được không ? KUMOP có hỗ trợ không ?</section>
-            <section class="question">Website của tôi do công ty KUMOP thiết kế có dùng để SEO hoặc quảng cáo Google
-                được
-                không ?</section>
-            <section class="question">Tôi không có chuyên môn về Website thì việc sử dụng và quản trị website có dễ
-                không ?
-            </section>
-        </div>
-        <!-- END CUSTOMER QUESTIONS -->
-
-        <!-- WEBSITE THEME LIST -->
-        <div class="website-theme-list-wrapper">
-            <h2 class="title">Các mẫu website</h2>
-            <div class="line"></div>
-            <ul class="list">
-                <li class="list-item"><a href="#">Mẫu Website thiết bị, dụng cụ</a></li>
-                <li class="list-item"><a href="#">Mẫu Website thiết kế in ấn</a></li>
-                <li class="list-item"><a href="#">Mẫu Website nhà hàng - khách sạn</a></li>
-                <li class="list-item"><a href="#">Mẫu Website thời trang</a></li>
-                <li class="list-item"><a href="#">Mẫu Website dịch vụ bảo vệ</a></li>
-                <li class="list-item"><a href="#">Mẫu Website quà tặng</a></li>
-                <li class="list-item"><a href="#">Mẫu Website du lịch</a></li>
-                <li class="list-item"><a href="#">Mẫu Website vận chuyển</a></li>
-                <li class="list-item"><a href="#">Mẫu Website linh kiện - điện tử</a></li>
-                <li class="list-item"><a href="#">Mẫu Website thuỷ sản - nông sản</a></li>
-                <li class="list-item"><a href="#">Mẫu Website Spa & Thẩm mỹ viện</a></li>
-                <li class="list-item"><a href="#">Mẫu Website văn phòng phẩm</a></li>
-                <li class="list-item"><a href="#">Mẫu Website Ô tô - xe máy</a></li>
-                <li class="list-item"><a href="#">Mẫu Website xây dựng</a></li>
-                <li class="list-item"><a href="#">Mẫu Website bất động sản</a></li>
-                <li class="list-item"><a href="#">Mẫu Website dịch vụ</a></li>
-                <li class="list-item"><a href="#">Mẫu Website giải trí</a></li>
-                <li class="list-item"><a href="#">Mẫu Website công nghiệp</a></li>
-                <li class="list-item"><a href="#">Mẫu Website mỹ phẩm</a></li>
-                <li class="list-item"><a href="#">Mẫu Website phòng cháy chữa cháy</a></li>
-                <li class="list-item"><a href="#">Mẫu Website nội thất</a></li>
-                <li class="list-item"><a href="#">Mẫu Website điện lạnh</a></li>
-                <li class="list-item"><a href="#">Mẫu Website bảo hành - sửa chữa</a></li>
-                <li class="list-item"><a href="#">Mẫu Website bệnh viện - y tế</a></li>
-                <li class="list-item"><a href="#">Mẫu Website thương mại diện tử</a></li>
-                <li class="list-item"><a href="#">Mẫu Website viện khoa học</a></li>
-                <li class="list-item"><a href="#">Mẫu Website nhà hàng tiệc cưới</a></li>
-                <li class="list-item"><a href="#">Mẫu Website thực phẩm</a></li>
-            </ul>
-        </div>
-        <!-- END WEBSITE THEME LIST -->
-
-        <!-- NEWS FEED -->
-        <div class="hero">
-            <div class="products-row news">
-                <h3 class="title">Tin Tức</h3>
+            {{#if careWebsites}}
+            <div class="products-row">
+                <h3 class="title">Quan tâm nhất</h3>
                 <div class="title-divider">
                     <div class="line"></div>
                     <div class="dot"></div>
                 </div>
-                <div class="decorator-left"></div>
-                <div class="decorator-right"></div>
                 <div class="filter-row">
                     <div class="filter-dropdown">
                         <div class="title">
@@ -613,182 +207,264 @@
                     </div>
                 </div>
                 <div class="products-grid">
-                    <div class="product">
+                    {{#each careWebsites}}
+                    <a class="product" href="/websites/{{_id}}">
                         <div class="product-card">
                             <div class="img-wrapper">
-                                <img class="image"
-                                    src="./images/transformers_4_optimus_prime_vs_dinobot-wallpaper-2560x2048.jpg"
-                                    alt="">
+                                <img class="image" src="{{images.[0]}}" alt="">
                             </div>
                             <div class="content">
-                                <h3 class="name">Transformer Website Style</h3>
+                                <h3 class="name">{{name}}</h3>
                                 <div class="row">
-                                    <span class="category f-left">Movie Trending</span>
-                                    <span class="date f-right">March 20, 2020</span>
+                                    <span class="location f-left" style="text-transform: capitalize;">Quốc gia :
+                                        {{country}}</span>
+                                    <span class="date f-right">{{#dd_mm_yyyy createdDate}}{{/dd_mm_yyyy}}</span>
                                 </div>
                                 <div class="row">
                                     <section class="author f-left">
                                         <div class="avatar">
                                         </div>
-                                        <span class="auth-name"><strong>Richard Conquer</strong></span>
+                                        <span class="auth-name"><strong>{{author}}</strong></span>
                                     </section>
+                                    <div class="field f-right">
+                                        <span>{{field}}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="product">
-                        <div class="product-card">
-                            <div class="img-wrapper">
-                                <img class="image" src="./images/tiger.jpg" alt="">
-                            </div>
-                            <div class="content">
-                                <h3 class="name">Animal Website Style</h3>
-                                <div class="row">
-                                    <span class="category f-left">Website Animal</span>
-                                    <span class="date f-right">January 20, 2020</span>
-                                </div>
-                                <div class="row">
-                                    <section class="author f-left">
-                                        <div class="avatar">
-                                        </div>
-                                        <span class="auth-name"><strong>Thao Nguyen</strong></span>
-                                    </section>
-                                </div>
-                            </div>
+                    </a>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if worldWebsites}}
+            <div class="products-row">
+                <h3 class="title">Thế Giới</h3>
+                <div class="title-divider">
+                    <div class="line"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="filter-row">
+                    <div class="filter-dropdown">
+                        <div class="title">
+                            XU HƯỚNG <i class="fas fa-caret-down"></i>
+                        </div>
+                        <div class="dropdown">
+                            <div class="dropdown-item">item-1</div>
+                            <div class="dropdown-item">item-2</div>
+                            <div class="dropdown-item">item-3</div>
+                            <div class="dropdown-item">item-4</div>
+                            <div class="dropdown-item">item-5</div>
+                            <div class="dropdown-item">item-6</div>
                         </div>
                     </div>
-                    <div class="product">
-                        <div class="product-card">
-                            <div class="img-wrapper">
-                                <img class="image" src="./images/lake-forest-mountains-illustration-4k-fv-1280x1024.jpg"
-                                    alt="">
-                            </div>
-                            <div class="content">
-                                <h3 class="name">Animated Nature Website Style</h3>
-                                <div class="row">
-                                    <span class="category f-left">Website 2D</span>
-                                    <span class="date f-right">March 5, 2020</span>
-                                </div>
-                                <div class="row">
-                                    <section class="author f-left">
-                                        <div class="avatar">
-                                        </div>
-                                        <span class="auth-name"><strong>Harry Peach</strong></span>
-                                    </section>
-                                </div>
-                            </div>
+                    <div class="filter-dropdown">
+                        <div class="title">
+                            LÃNH VỰC <i class="fas fa-caret-down"></i>
+                        </div>
+                        <div class="dropdown">
+                            <div class="dropdown-item">item-1</div>
+                            <div class="dropdown-item">item-2</div>
+                            <div class="dropdown-item">item-3</div>
+                            <div class="dropdown-item">item-4</div>
+                            <div class="dropdown-item">item-5</div>
+                            <div class="dropdown-item">item-6</div>
                         </div>
                     </div>
-                    <div class="product">
-                        <div class="product-card">
-                            <div class="img-wrapper">
-                                <img class="image" src="./images/owl.jpg" alt="">
-                            </div>
-                            <div class="content">
-                                <h3 class="name">3D Technology Website</h3>
-                                <div class="row">
-                                    <span class="category f-left">Website 3D</span>
-                                    <span class="date f-right">February 20, 2020</span>
-                                </div>
-                                <div class="row">
-                                    <section class="author f-left">
-                                        <div class="avatar">
-                                        </div>
-                                        <span class="auth-name"><strong>Dang Huy</strong></span>
-                                    </section>
-                                </div>
-                            </div>
+                    <div class="filter-dropdown">
+                        <div class="title">
+                            MÀU SẮC <i class="fas fa-caret-down"></i>
+                        </div>
+                        <div class="dropdown">
+                            <div class="dropdown-item">item-1</div>
+                            <div class="dropdown-item">item-2</div>
+                            <div class="dropdown-item">item-3</div>
+                            <div class="dropdown-item">item-4</div>
+                            <div class="dropdown-item">item-5</div>
+                            <div class="dropdown-item">item-6</div>
                         </div>
                     </div>
-                    <div class="product">
-                        <div class="product-card">
-                            <div class="img-wrapper">
-                                <img class="image"
-                                    src="./images/transformers_4_optimus_prime_vs_dinobot-wallpaper-2560x2048.jpg"
-                                    alt="">
-                            </div>
-                            <div class="content">
-                                <h3 class="name">Transformer Website Style</h3>
-                                <div class="row">
-                                    <span class="category f-left">Movie Trending</span>
-                                    <span class="date f-right">March 20, 2020</span>
-                                </div>
-                                <div class="row">
-                                    <section class="author f-left">
-                                        <div class="avatar">
-                                        </div>
-                                        <span class="auth-name"><strong>Richard Conquer</strong></span>
-                                    </section>
-                                </div>
-                            </div>
+                    <div class="filter-dropdown">
+                        <div class="title">
+                            SỐ LƯỢNG CỘT <i class="fas fa-caret-down"></i>
+                        </div>
+                        <div class="dropdown">
+                            <div class="dropdown-item">item-1</div>
+                            <div class="dropdown-item">item-2</div>
+                            <div class="dropdown-item">item-3</div>
+                            <div class="dropdown-item">item-4</div>
+                            <div class="dropdown-item">item-5</div>
+                            <div class="dropdown-item">item-6</div>
                         </div>
                     </div>
-                    <div class="product">
-                        <div class="product-card">
-                            <div class="img-wrapper">
-                                <img class="image" src="./images/tiger.jpg" alt="">
-                            </div>
-                            <div class="content">
-                                <h3 class="name">Animal Website Style</h3>
-                                <div class="row">
-                                    <span class="category f-left">Website Animal</span>
-                                    <span class="date f-right">January 20, 2020</span>
-                                </div>
-                                <div class="row">
-                                    <section class="author f-left">
-                                        <div class="avatar">
-                                        </div>
-                                        <span class="auth-name"><strong>Thao Nguyen</strong></span>
-                                    </section>
-                                </div>
-                            </div>
+                    <div class="filter-dropdown">
+                        <div class="title">
+                            ĐẤT NƯỚC <i class="fas fa-caret-down"></i>
                         </div>
-                    </div>
-                    <div class="product">
-                        <div class="product-card">
-                            <div class="img-wrapper">
-                                <img class="image" src="./images/lake-forest-mountains-illustration-4k-fv-1280x1024.jpg"
-                                    alt="">
-                            </div>
-                            <div class="content">
-                                <h3 class="name">Animated Nature Website Style</h3>
-                                <div class="row">
-                                    <span class="category f-left">Website 2D</span>
-                                    <span class="date f-right">March 5, 2020</span>
-                                </div>
-                                <div class="row">
-                                    <section class="author f-left">
-                                        <div class="avatar">
-                                        </div>
-                                        <span class="auth-name"><strong>Harry Peach</strong></span>
-                                    </section>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product">
-                        <div class="product-card">
-                            <div class="img-wrapper">
-                                <img class="image" src="./images/owl.jpg" alt="">
-                            </div>
-                            <div class="content">
-                                <h3 class="name">3D Technology Website</h3>
-                                <div class="row">
-                                    <span class="category f-left">Website 3D</span>
-                                    <span class="date f-right">February 20, 2020</span>
-                                </div>
-                                <div class="row">
-                                    <section class="author f-left">
-                                        <div class="avatar">
-                                        </div>
-                                        <span class="auth-name"><strong>Dang Huy</strong></span>
-                                    </section>
-                                </div>
-                            </div>
+                        <div class="dropdown">
+                            <div class="dropdown-item">item-1</div>
+                            <div class="dropdown-item">item-2</div>
+                            <div class="dropdown-item">item-3</div>
+                            <div class="dropdown-item">item-4</div>
+                            <div class="dropdown-item">item-5</div>
+                            <div class="dropdown-item">item-6</div>
                         </div>
                     </div>
                 </div>
+                <div class="products-grid">
+                    {{#each worldWebsites}}
+                    <a class="product" href="/websites/{{_id}}">
+                        <div class="product-card">
+                            <div class="img-wrapper">
+                                <img class="image" src="{{images.[0]}}" alt="">
+                            </div>
+                            <div class="content">
+                                <h3 class="name">{{name}}</h3>
+                                <div class="row">
+                                    <span class="location f-left" style="text-transform: capitalize;">Quốc gia :
+                                        {{country}}</span>
+                                    <span class="date f-right">{{#dd_mm_yyyy createdDate}}{{/dd_mm_yyyy}}</span>
+                                </div>
+                                <div class="row">
+                                    <section class="author f-left">
+                                        <div class="avatar">
+                                        </div>
+                                        <span class="auth-name"><strong>{{author}}</strong></span>
+                                    </section>
+                                    <div class="field f-right">
+                                        <span>{{field}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    {{/each}}
+                </div>
             </div>
+            {{/if}}
+        </div>
+
+        <!-- CUSTOMER REVIEW -->
+        {{> customerReviews}}
+        <!-- END CUSTOMER REVIEW -->
+
+        <!-- CUSTOMER QUESTIONS -->
+        {{> customerQuestions}}
+        <!-- END CUSTOMER QUESTIONS -->
+
+        <!-- WEBSITE THEME LIST -->
+        {{> websiteThemeList}}
+        <!-- END WEBSITE THEME LIST -->
+
+        <!-- NEWS FEED -->
+        <div class="hero">
+            {{#if news}}
+            <div class="products-row news">
+                <h3 class="title">Tin Tức</h3>
+                <div class="title-divider">
+                    <div class="line"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="filter-row">
+                    <div class="filter-dropdown">
+                        <div class="title">
+                            XU HƯỚNG <i class="fas fa-caret-down"></i>
+                        </div>
+                        <div class="dropdown">
+                            <div class="dropdown-item">item-1</div>
+                            <div class="dropdown-item">item-2</div>
+                            <div class="dropdown-item">item-3</div>
+                            <div class="dropdown-item">item-4</div>
+                            <div class="dropdown-item">item-5</div>
+                            <div class="dropdown-item">item-6</div>
+                        </div>
+                    </div>
+                    <div class="filter-dropdown">
+                        <div class="title">
+                            LÃNH VỰC <i class="fas fa-caret-down"></i>
+                        </div>
+                        <div class="dropdown">
+                            <div class="dropdown-item">item-1</div>
+                            <div class="dropdown-item">item-2</div>
+                            <div class="dropdown-item">item-3</div>
+                            <div class="dropdown-item">item-4</div>
+                            <div class="dropdown-item">item-5</div>
+                            <div class="dropdown-item">item-6</div>
+                        </div>
+                    </div>
+                    <div class="filter-dropdown">
+                        <div class="title">
+                            MÀU SẮC <i class="fas fa-caret-down"></i>
+                        </div>
+                        <div class="dropdown">
+                            <div class="dropdown-item">item-1</div>
+                            <div class="dropdown-item">item-2</div>
+                            <div class="dropdown-item">item-3</div>
+                            <div class="dropdown-item">item-4</div>
+                            <div class="dropdown-item">item-5</div>
+                            <div class="dropdown-item">item-6</div>
+                        </div>
+                    </div>
+                    <div class="filter-dropdown">
+                        <div class="title">
+                            SỐ LƯỢNG CỘT <i class="fas fa-caret-down"></i>
+                        </div>
+                        <div class="dropdown">
+                            <div class="dropdown-item">item-1</div>
+                            <div class="dropdown-item">item-2</div>
+                            <div class="dropdown-item">item-3</div>
+                            <div class="dropdown-item">item-4</div>
+                            <div class="dropdown-item">item-5</div>
+                            <div class="dropdown-item">item-6</div>
+                        </div>
+                    </div>
+                    <div class="filter-dropdown">
+                        <div class="title">
+                            ĐẤT NƯỚC <i class="fas fa-caret-down"></i>
+                        </div>
+                        <div class="dropdown">
+                            <div class="dropdown-item">item-1</div>
+                            <div class="dropdown-item">item-2</div>
+                            <div class="dropdown-item">item-3</div>
+                            <div class="dropdown-item">item-4</div>
+                            <div class="dropdown-item">item-5</div>
+                            <div class="dropdown-item">item-6</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="products-grid news">
+                    {{#each news}}
+                    <a class="product" href="/tin-tuc/{{_id}}">
+                        <div class="product-card">
+                            <div class="img-wrapper">
+                                <img class="image" src="{{avatar}}" alt="">
+                            </div>
+                            <div class="content">
+                                <h3 class="name">{{title}}</h3>
+                                <div class="row">
+                                    <span class="tags f-left"><strong>Tags :</strong> {{#each tags}}
+                                        {{this}},{{/each}}...</span>
+                                    <span class="date f-right">{{#dd_mm_yyyy createdDate}}{{/dd_mm_yyyy}}</span>
+                                </div>
+                                <div class="row">
+                                    <section class="author f-left">
+                                        <div class="avatar">
+                                        </div>
+                                        <span class="auth-name"><strong>{{author}}</strong></span>
+                                    </section>
+                                    <div class="keywords f-right">
+                                        <div class="keyword">{{keywords.[0]}}</div>
+                                        <div class="keyword">{{keywords.[1]}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
         </div>
         <!-- END NEWS FEED -->
         <!-- BANNER -->
@@ -798,115 +474,10 @@
         <!-- END BANNER -->
     </div>
     <!-- END MAIN CONTENT -->
-    <footer id="main-footer">
-    <h4 class="text-row title">Chúng tôi hỗ trợ khách hàng 7 ngày trong tuần với hotline</h4>
-    <h3 class="text-row phone-number">082 878 6789</h3>
-    <div class="text-row description">Với đội ngũ nhân viên hơn 7 năm kinh nghiệm, không chỉ thiết kế website, hướng
-      dẫn, hỗ trợ và xử lý vấn đề về website, chúng tôi luôn đồng hành, tư vấn và phát triển cùng doanh nghiệp của
-      bạn</div>
-    <div class="services-grid">
-      <div class="service">
-        <div class="title">Tư Vấn thiết kế Web</div>
-        <div class="icon"><i class="fa fa-headphones" aria-hidden="true"></i></div>
-        <div class="main-text">028 878 6789</div>
-      </div>
-      <div class="service">
-        <div class="title">Hỗ trợ kĩ thuật</div>
-        <div class="icon"><i class="fas fa-phone"></i></div>
-        <div class="main-text">0911 724 247</div>
-      </div>
-      <div class="service">
-        <div class="title">Gửi yêu cầu làm web</div>
-        <div class="icon"><i class="fa fa-paper-plane" aria-hidden="true"></i></div>
-        <div class="main-text">info@kumop.vn</div>
-      </div>
-    </div>
-    <div class="line"></div>
-    <div class="columns-grid">
-      <section id="contact" class="column">
-        <h4 class="title">Liên Hệ</h4>
-        <h3 class="company-name">Công Ty TNHH KUMOP</h3>
-        <div class="company-info">
-          <div class="address"><i class="fas fa-map-marker-alt"></i>27 Hoàng Hoa Thám, phường 6, quận Tân Bình, TP Hồ
-            Chí Minh</div>
-          <div class="phone-numbers">
-            <span class="hot-line"><i class="fas fa-phone-volume"></i>028 66 828 833</span>
-            <span class="mobile"><i class="fas fa-mobile-alt"></i>082 878 6789</span>
-          </div>
-          <div class="emails">
-            <div class="email"><i class="far fa-envelope"></i>info@kumop.vn</div>
-            <div class="email"><i class="far fa-envelope"></i>support@mypage.vn</div>
-          </div>
-        </div>
-      </section>
-      <section id="services" class="column">
-        <h4 class="title">Dịch Vụ</h4>
-        <a href="#" class="item">Domain</a>
-        <a href="#" class="item">Hosting</a>
-        <a href="#" class="item">Dịch vụ SEO</a>
-        <a href="#" class="item">Chăm sóc Website</a>
-        <a href="#" class="item">Email Doanh nghiệp</a>
-      </section>
-      <section id="support" class="column">
-        <h4 class="title">Hỗ trợ</h4>
-        <a href="#" class="item">Liên hệ</a>
-        <a href="#" class="item">Hỗ trợ</a>
-        <a href="#" class="item">Câu hỏi thường gặp</a>
-        <a href="#" class="item">Quy trình thiết kế Web</a>
-        <a href="#" class="item">Điều kiện chính sách</a>
-      </section>
-      <section id="web-design" class="column">
-        <h4 class="title">Thiết kế web chuyên nghiệp</h4>
-        <a href="#" class="item">Thiết kế web giá rẻ</a>
-        <a href="#" class="item">Thiết kế web theo mẫu</a>
-        <a href="#" class="item">Thiết kế web theo yêu cầu</a>
-        <a href="#" class="item">Thiết kế web chuyên nghiệp</a>
-        <a href="#" class="item">Thiết kế web chuẩn Mobile</a>
-      </section>
-    </div>
-    <div id="footer-bottom">
-      <div class="columns-grid">
-        <section class="column">
-          <div class="row"><a href="#">WEBSITE THEMEPLATES</a></div>
-          <div class="row"><a href="#">DOMAINS</a></div>
-          <div class="row"><a href="#">HOSTING</a></div>
-          <div class="row"><a href="#">VPS LINUX</a></div>
-          <div class="row"><a href="#">WEBSITE MANAGING</a></div>
-        </section>
-        <section class="column">
-          <div class="row"><a href="#">WEBSITE THEMEPLATES</a></div>
-          <div class="row"><a href="#">DOMAINS</a></div>
-          <div class="row"><a href="#">HOSTING</a></div>
-          <div class="row"><a href="#">VPS LINUX</a></div>
-          <div class="row"><a href="#">WEBSITE MANAGING</a></div>
-        </section>
-        <section class="column">
-          <div class="row"><a href="#">WEBSITE THEMEPLATES</a></div>
-          <div class="row"><a href="#">DOMAINS</a></div>
-          <div class="row"><a href="#">HOSTING</a></div>
-          <div class="row"><a href="#">VPS LINUX</a></div>
-          <div class="row"><a href="#">WEBSITE MANAGING</a></div>
-        </section>
-        <section class="column">
-          <div class="row"><a href="#">WEBSITE THEMEPLATES</a></div>
-          <div class="row"><a href="#">DOMAINS</a></div>
-          <div class="row"><a href="#">HOSTING</a></div>
-          <div class="row"><a href="#">VPS LINUX</a></div>
-          <div class="row"><a href="#">WEBSITE MANAGING</a></div>
-        </section>
-        <section class="column">
-          <div class="row"><a href="#">WEBSITE THEMEPLATES</a></div>
-          <div class="row"><a href="#">DOMAINS</a></div>
-          <div class="row"><a href="#">HOSTING</a></div>
-          <div class="row"><a href="#">VPS LINUX</a></div>
-          <div class="row"><a href="#">WEBSITE MANAGING</a></div>
-        </section>
-      </div>
-    </div>
-    <div id="copyright"><strong>KUMOP</strong> @copyright 2019</div>
 
-    <script src="./javascripts/homepage.js"></script>
-  </footer>
-  <!-- END FOOTER -->
+    <!-- FOOTER -->
+    {{> footer}}
+    <!-- END FOOTER -->
 </body>
+
 </html>

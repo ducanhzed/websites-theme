@@ -136,6 +136,7 @@
   margin: 20px 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  justify-items: center;
   grid-auto-rows: 380px;
   column-gap: 20px;
   row-gap: 20px;
@@ -143,13 +144,16 @@
 }
 
 .hero .products-row .products-grid .product {
-  background: rgb(78, 78, 78);
+  /*  background: rgb(78, 78, 78); */
+  max-width: 450px;
   z-index: 2;
   overflow: hidden;
   position: relative;
   transition-duration: 0.3s;
   transition-timing-function: ease-in;
   cursor: pointer;
+  color: black;
+  text-decoration: none;
 }
 .hero .products-row .products-grid .product:hover {
   border: none;
@@ -273,9 +277,20 @@
   .product-card
   > .content
   .row
-  .tags {
+  .keywords {
   display: flex;
   color: white;
+}
+
+.hero
+  .products-row
+  .products-grid.news
+  .product
+  .product-card
+  > .content
+  > .row
+  > .tags {
+  text-transform: capitalize;
 }
 
 .hero
@@ -284,14 +299,32 @@
   .product
   .product-card
   > .content
+  > .row
+  > .field
+  span {
+  padding: 2px 5px;
+  border-radius: 5px;
+  background: rgb(0, 155, 21);
+  line-height: normal;
+  text-transform: capitalize;
+  color: whitesmoke;
+}
+
+.hero
+  .products-row
+  .products-grid.news
+  .product
+  .product-card
+  > .content
   .row
-  .tags
-  .tag {
+  .keywords
+  .keyword {
   margin: 3px;
   padding: 2px 3px;
   border-radius: 5px;
   background: rgb(0, 155, 21);
   line-height: normal;
+  text-transform: capitalize;
 }
 /*END PRODUCTS ROW*/
 
@@ -304,10 +337,11 @@
   font-size: 13px;
   z-index: 2;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   font-family: "Montserrat", sans-serif;
-  height: 40px;
+  height: 30px;
+  max-height: 30px;
   margin-bottom: 80px;
 }
 
@@ -321,19 +355,24 @@
 .hero > .pagination > .pages > .page {
   text-decoration: none;
   color: black;
-  padding: 0 16px;
+  padding: 0 10px;
   margin: 0 3px;
-  line-height: 40px;
+  line-height: 30px;
   background: rgb(220, 220, 220);
-  font-size: 1.2em;
+  font-size: 1em;
   cursor: pointer;
   z-index: 500;
+  display: inline-block;
   position: relative;
 }
 
 .hero > .pagination > .pages > .page.active {
   color: white;
   background: rgb(30, 30, 30);
+}
+
+.hero > .pagination > .pages > .page.hide {
+  display: none;
 }
 
 .hero > .pagination > .more {
@@ -344,7 +383,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 0 20px;
   cursor: pointer;
 }
 /* END PAGINATION */
