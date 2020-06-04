@@ -80,9 +80,9 @@ router.get('/danh-muc-websites', async function (req, res, next) {
     websitesPaginationArr.push(i);
   }
 
-  //console.log(websitesPaginationArr)
-  //console.log(numOfWebsites)
-  //console.log(tagsOrKeyWordsForNews)
+  console.log(websitesPaginationArr)
+  console.log(numOfWebsites)
+  console.log(tagsOrKeyWordsForNews)
 
   res.render('category-product', { title: 'Danh mục Website', menu, websites, news, websitesPaginationArr });
 });

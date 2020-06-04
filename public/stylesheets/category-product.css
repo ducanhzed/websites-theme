@@ -474,11 +474,33 @@
   .hero .products-row .products-grid {
     grid-auto-rows: 300px;
   }
+  .website-theme-list-wrapper {
+    padding: 20px 5px;
+  }
   .website-theme-list-wrapper > .line {
     display: none !important;
   }
+
   .website-theme-list-wrapper > .title {
-    font-size: 20px;
+    line-height: normal;
+    text-align: center;
+    font-size: 1em;
+    margin-bottom: 10px;
+  }
+
+  .website-theme-list-wrapper > .list {
+    display: flex;
+    justify-content: left;
+    align-items: flex-start;
+    flex-direction: column;
+    max-width: 100vh;
+    list-style-type: disc;
+    width: 95%;
+    padding: 20px 5px;
+  }
+  .website-theme-list-wrapper > .list > .list-item {
+    margin-left: 10px;
+    margin-bottom: 10px;
   }
   /*HERO END*/
 }

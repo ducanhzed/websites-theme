@@ -194,40 +194,7 @@
 
     {{> footer}}
     <!-- END FOOTER -->
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function (e) {
-            const currLink = window.location.href
-            const regexPageNumber = /\WpageNumber=\d+/i
-            const paginationArr = document.querySelectorAll('.pagination > .pages a.page')
-
-            function addActiveToPagination() {
-
-                //choose what to show
-                const regexToGetPageNumber = currLink.match(regexPageNumber)
-                let number = parseInt(regexToGetPageNumber[0].replace(/\WpageNumber=/, '')) || 1;
-                paginationArr[number - 1].classList.add('active');
-                paginationArr[number - 1].classList.remove('hide');
-                const number2 = (number - 2 < 0) ? number + 1 : number - 2;
-                const number3 = (number < paginationArr.length) ? number : (number - 3);
-
-                paginationArr[number2].classList.remove('hide');
-                paginationArr[number3].classList.remove('hide');
-            }
-
-            paginationArr.forEach(e => {
-                e.addEventListener('click', function (e) {
-                    let newLink = currLink.replace(regexPageNumber, '');
-                    console.log(newLink)
-                    newLink += (newLink.match(/\?\s+/)) ? `&pageNumber=${this.dataset.pagenumber}` : `\?pageNumber=${this.dataset.pagenumber}`
-                    newLink.replace(/\?\?/, '?');
-                    console.log(newLink)
-                    window.location.href = newLink
-                }, { once: false })
-            })
-            addActiveToPagination()
-        })
-    </script>
+    <script src="/javascripts/category-product.js"></script>   
 </body>
 
 </html>

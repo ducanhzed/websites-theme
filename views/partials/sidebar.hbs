@@ -27,7 +27,7 @@
         <div class="title">Màu sắc<i class="fas fa-caret-down"></i></div>
         <div class="dropdown">
             {{#each menu.colors}}
-            <a href="/danh-muc-websites?color={{this.name}}" class="dropdown-item">{{this.name}}</a>
+            <a href="/danh-muc-websites?color={{this.name}}" class="dropdown-item">Màu {{this.name}}</a>
             {{/each}}
         </div>
     </div>
@@ -39,7 +39,7 @@
         <div class="title">Số lượng cột<i class="fas fa-caret-down"></i></div>
         <div class="dropdown">
             {{#each menu.cols}}
-            <a href="/danh-muc-websites?numOfCols={{this}}" class="dropdown-item">{{this}}</a>
+            <a href="/danh-muc-websites?numOfCols={{this}}" class="dropdown-item">{{this}} Cột</a>
             {{/each}}
         </div>
     </div>
