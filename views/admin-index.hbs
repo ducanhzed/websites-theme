@@ -6,8 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
     <link rel="shortcut icon" type="image/png" href="favicon.png" />
+    <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 </head>
 <body>
     {{> admin_header}}
+        <textarea name="editor1"></textarea>
+        <button id="a">Show</button>
+        <script>
+                CKEDITOR.replace( 'editor1' );
+                document.getElementById('a').addEventListener('click', function(e) {
+                    var data = CKEDITOR.instances.editor1.getData();
+                    console.log(data);
+                })
+        </script>   
 </body>
 </html>
