@@ -59,7 +59,6 @@ router.get('/danh-muc-websites', async function (req, res, next) {
   console.log(query)
 
   //getting data by query
-  await mongooseConnecting()
   const menu = await getMenu()
 
   //for pagination
@@ -72,7 +71,6 @@ router.get('/danh-muc-websites', async function (req, res, next) {
 
   const websites = await websiteService.findWebsiteWithCriteria(query, skip * CARDS_PER_CATE_PAGE, CARDS_PER_CATE_PAGE)
   const news = await newsService.findNewsbyTagsOrKeywords(tagsOrKeyWordsForNews, Math.floor(Math.random() * CARDS_PER_CATE_PAGE));
-  await mongoose.connection.close()
 
   websitesPaginationArr = [];
 
@@ -93,14 +91,12 @@ router.get('/editor-js', function (req, res, next) {
 
 
 router.get('/', async function (req, res, next) {
-  await mongooseConnecting();
 
   const newWebsites = await websiteService.findNewWebsite();
   const careWebsites = await websiteService.findNewWebsite(2);
   const worldWebsites = await websiteService.findNewWebsite(3);
   const news = await newsService.getNews();
   let menu = await getMenu()
-  await mongoose.connection.close();
   const [a, b, c] = await Promise.all([
 
   ])
@@ -136,10 +132,21 @@ router.get('/', async function (req, res, next) {
 router.get('/websites/:id', async function (req, res, next) {
   const websitesService = new WebsiteService();
   if (req.params.id) {
-    await mongooseConnecting();
     let website = await websitesService.findWebsiteByID(`${req.params.id}`)
-    await mongoose.connection.close();
     if (website) {
+      let recent = req.cookies.recent ? JSON.parse(req.cookies.recent) : [];
+      if (!recent.includes(req.params.id)) {
+		recent.unshift(req.params.id);
+		recent = recent.slice(0, 10);
+        res.cookie('recent', JSON.stringify(recent), { maxAge: 3600 * 24 * 1000, httpOnly: true });
+      } else {
+        // Pick that website id to top of list 
+        recent = recent.filter(id => id !== req.params.id);
+		recent.unshift(req.params.id);
+		recent = recent.slice(0, 10);
+        res.cookie('recent', JSON.stringify(recent), { maxAge: 3600 * 24 * 1000, httpOnly: true });
+      }
+
       res.send(website);
     }
     else next();
@@ -149,9 +156,7 @@ router.get('/websites/:id', async function (req, res, next) {
 router.get('/tin-tuc/:id', async function (req, res, next) {
   const newsService = new NewsService();
   if (req.params.id) {
-    await mongooseConnecting();
     let news = await newsService.findNewsByID(`${req.params.id}`)
-    await mongoose.connection.close();
     if (news) {
       res.status(200).send(news);
     }

@@ -16,8 +16,6 @@ router.get('/', async function (req, res, next) {
 })
 
 router.get('/count-websites', async function (req, res, next) {
-    await mongooseConnecting()
     res.json({'response': await Websites.countDocuments()});
-    mongoose.connection.close();
 })
 module.exports = router

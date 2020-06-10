@@ -4,6 +4,7 @@ module.exports = async function mongooseConnecting() {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
+    useMongoClient: true,
   }, (err) => {
     if (!err) {
       console.log('MongoDB Connection Succeeded.')

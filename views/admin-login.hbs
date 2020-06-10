@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="shortcut icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="/stylesheets/admin-login.css" />
+    <link rel="stylesheet" href="/javascripts/fontawsome5/css/all.min.css">
+</head>
+<body>
+    <div class="login_container">
+        <div class="login">
+            <h1 class="login_title">Sign in</h1>
+            <form method="POST" action="/admin/login" id='loginForm'>
+                <div class="login_input input_group">
+                    <input type="text" placeholder="Username" name="name" />
+                </div>
+                <div class="login_input input_group">
+                    <input type="password" placeholder="Password" name="password" />
+                </div>
+                <input type="hidden" value="{{csrfToken}}" name="_csrf" />
+                <button>SIGN IN</button>
+            </form>
+        </div>
+    </div>
+    <div class="message"></div>
+
+    <script src="/javascripts/jQuery.min.js"></script>
+    <script src="/javascripts/fontawsome5/js/all.min.js"></script>
+    <script src="/javascripts/admin.js"></script>
+</body>
+</html>
