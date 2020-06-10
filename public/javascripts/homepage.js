@@ -9,12 +9,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     console.log(sidebarCloseBtn)
-    filterDropdowns.forEach(e => {
-        e.addEventListener('mouseenter', function (e) {
-            let dropdown = this.querySelector('.dropdown')
-            dropdown.style.left = `${-this.offsetLeft}px`
-            dropdown.style.width = `${filterRow.offsetWidth}px`
+    filterDropdowns.forEach((e, index) => {
+        let dropdown = e.querySelector('.dropdown')
+        
+        dropdown.style.left = `${-e.offsetLeft + 3 * Math.floor(index % 5)}px`
+        e.addEventListener('mouseenter', function (event) {
+            dropdown.style.width = `${filterRow.offsetWidth}px`;
         })
+
+        
     })
 
     sidebarCategories.forEach(e => {

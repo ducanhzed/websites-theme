@@ -4,7 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let sidebar = document.querySelector('#main-menu.sidebar')
     let sidebarCloseBtn = document.querySelector('#main-menu.sidebar #close-btn')
     let sidebarCategories = document.querySelectorAll('#main-menu.sidebar .category');
-
+    let formSelections = document.querySelectorAll('.form-container > #filter-form select');
+    let formInputs = document.querySelectorAll('.form-container > #filter-form input')
+    const submitBtn = document.querySelector('.form-container > .submit > button')
     //sidebar
     sidebarCategories.forEach(e => {
         e.querySelector('.title').addEventListener('click', () => {
@@ -61,7 +63,27 @@ document.addEventListener('DOMContentLoaded', () => {
             newLink.replace(/\?\?/, '?');
             console.log(newLink)
             window.location.href = newLink
-        }, { once: false })
+        }, { once: true })
     })
+
+    submitBtn.addEventListener('click', function (e) {
+        let newLink = currLink.replace(/\?.+/g, '');
+
+        e.preventDefault();
+        formInputs.forEach((elem, index) => {
+            const added = ((index == 0) ? 'lowPrice=' : 'highPrice=') + elem.value
+            if (elem.value)
+                newLink += (newLink.match(/\?./)) ? `&${added}` : `\?${added}`
+        })
+
+        formSelections.forEach(elem => {
+                if (elem.value)
+                newLink += (newLink.match(/\?./)) ? `&${elem.value}` : `\?${elem.value}`
+        })
+
+        newLink.replace(/\?\?/, '?');
+        console.log(newLink)
+        window.location.href = newLink
+    }, { once: true })
     addActiveToPagination()
 })

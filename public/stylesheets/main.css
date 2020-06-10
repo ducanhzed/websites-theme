@@ -202,6 +202,7 @@ body {
   text-indent: 20px;
   align-items: center;
   text-align: left;
+  z-index: 100;
 }
 #main-menu.sidebar .category .title svg {
   margin-left: 10px;
@@ -217,6 +218,7 @@ body {
   width: 100%;
   position: relative;
   max-height: 0;
+  z-index: 10;
 }
 #main-menu.sidebar .category .dropdown::-webkit-scrollbar {
   width: 13px;
@@ -226,17 +228,17 @@ body {
 
 #main-menu.sidebar .category.dropped .dropdown::-webkit-scrollbar-track {
   border-radius: 15px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
-#main-menu.sidebar .category.dropped .dropdown::-webkit-scrollbar-thumb  {
+#main-menu.sidebar .category.dropped .dropdown::-webkit-scrollbar-thumb {
   background-color: rgba(238, 238, 238, 0.7);
   min-width: 20px;
   border-radius: 10px;
   border: rgb(39, 39, 39) 3px solid;
   box-sizing: border-box;
+  transition-delay: 0.3s;
 }
-
 
 #main-menu.sidebar .category.dropped .dropdown {
   display: flex;
@@ -273,7 +275,7 @@ body {
 }
 
 #main-menu.sidebar .category .dropdown .dropdown-item:last-child {
-  border: none
+  border: none;
 }
 
 #main-menu.sidebar .category.dropped .dropdown .dropdown-item {
@@ -537,6 +539,86 @@ body {
   color: white;
 }
 /* END FOOTER*/
+
+/* FILTER FORM */
+#filter-form {
+  width: 98%;
+  max-width: 1366px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  margin: 30px auto;
+  background: rgb(233, 233, 233);
+  position: relative;
+  justify-content: left;
+  font-family: "Quicksand", sans-serif;
+  padding: 20px 0;
+}
+#filter-form > .custom-select {
+  flex-shrink: 0;
+  flex-grow: 1;
+  min-width: 300px;
+  float: left;
+  margin: 12px auto;
+  line-height: 25px;
+}
+
+#filter-form > .custom-select > .selection > .value {
+  text-transform: capitalize;
+  line-height: 50px !important;
+}
+#filter-form > .custom-select > .selection {
+  width: 170px;
+  font-size: 14px;
+  min-height: 25px;
+  float: right;
+  text-transform: capitalize;
+}
+
+#filter-form > .custom-select input {
+  text-indent: 5px
+}
+#filter-form > .custom-select > .key {
+  font-weight: 600;
+
+  float: left;
+  text-transform: capitalize;
+}
+#filter-form + .submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#filter-form + .submit > button {
+  margin: auto;
+  max-height: 30px;
+  max-width: 150px;
+  width: 120px;
+  height: 30px;
+  background: rgb(30,30,30);
+  color: white;
+  border: 2px solid black;
+  text-align: center;
+  text-transform: capitalize;
+  cursor: pointer;
+  border-radius: 10px;
+  font-size: 15px;
+  transition-duration: 0.2s;
+  transition-timing-function: cubic-bezier(.4,2.08,.55,.44);
+}
+
+
+#filter-form + .submit > button:hover {
+  background: none;
+  color: black;
+  border-radius: 0px;
+  transform-origin: center;
+  transform: scale(1.1);
+  transition-duration: 0.2s;
+  transition-timing-function: cubic-bezier(.4,2.08,.55,.44);
+}
+
+
+/* END FILTER FORM */
 @media screen and (max-width: 1080px) {
   #main-footer > #footer-bottom {
     display: none;
