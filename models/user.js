@@ -6,8 +6,9 @@ const user = new mongoose.Schema({
     role: { type: String, required: true }
 });
 
-user.methods.hashPassword = function (password) {
-    return bcrypt.hashSync(password, 10);
+user.methods.hashPassword = function () {
+    this.password = bcrypt.hashSync(this.password, 10);
+    return this.password;
 }
 
 user.methods.validPassword = function (password) {

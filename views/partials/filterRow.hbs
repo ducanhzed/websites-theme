@@ -1,0 +1,52 @@
+<div class="filter-row">
+    <div class="filter-dropdown">
+        <div class="title">
+            XU HƯỚNG <i class="fas fa-caret-down"></i>
+        </div>
+        <div class="dropdown">
+            {{#each menu.trends}}
+            <div class="dropdown-item">{{this.name}}</div>
+            {{/each}}
+        </div>
+    </div>
+    <div class="filter-dropdown">
+        <div class="title">
+            LÃNH VỰC <i class="fas fa-caret-down"></i>
+        </div>
+        <div class="dropdown">
+            {{#each menu.fields}}
+            <div class="dropdown-item">{{this.name}}</div>
+            {{/each}}
+        </div>
+    </div>
+    <div class="filter-dropdown">
+        <div class="title">
+            MÀU SẮC <i class="fas fa-caret-down"></i>
+        </div>
+        <div class="dropdown">
+            {{#each menu.colors}}
+            <div class="dropdown-item">Màu {{this.name}}</div>
+            {{/each}}
+        </div>
+    </div>
+    <div class="filter-dropdown">
+        <div class="title">
+            SỐ LƯỢNG CỘT <i class="fas fa-caret-down"></i>
+        </div>
+        <div class="dropdown">
+            {{#each menu.cols}}
+            <div class="dropdown-item">{{this}} Cột</div>
+            {{/each}}
+        </div>
+    </div>
+    <div class="filter-dropdown">
+        <div class="title">
+            ĐẤT NƯỚC <i class="fas fa-caret-down"></i>
+        </div>
+        <div class="dropdown">
+            {{#each menu.countries}}
+            <div class="dropdown-item">{{this.name}}</div>
+            {{/each}}
+        </div>
+    </div>
+</div>

@@ -4,21 +4,22 @@ document.addEventListener('DOMContentLoaded', () => {
     let filterDropdowns = document.querySelectorAll('.products-row>.filter-row>.filter-dropdown')
     let filterRow = document.querySelector('.products-row > .filter-row')
     let sidebar = document.querySelector('#main-menu.sidebar')
-    let sidebarCloseBtn = document.querySelector('#main-menu.sidebar > #close-btn')
+    let sidebarCloseBtn = document.querySelector('#main-menu.sidebar #close-btn')
     let sidebarCategories = document.querySelectorAll('#main-menu.sidebar .category');
 
 
-
-    filterDropdowns.forEach(e => {
-        e.addEventListener('mouseenter', function (e) {
-            let dropdown = this.querySelector('.dropdown')
-            dropdown.style.left = `${-this.offsetLeft}px`
-            dropdown.style.width = `${filterRow.offsetWidth}px`
+    console.log(sidebarCloseBtn)
+    filterDropdowns.forEach((e, index) => {
+        let dropdown = e.querySelector('.dropdown')
+        
+        dropdown.style.left = `${-e.offsetLeft + 3 * Math.floor(index % 5)}px`
+        e.addEventListener('mouseenter', function (event) {
+            dropdown.style.width = `${filterRow.offsetWidth}px`;
         })
+
+        
     })
-    sidebarCloseBtn.addEventListener('click', () => {
-        sidebar.classList.remove('expand')
-    })
+
     sidebarCategories.forEach(e => {
         e.querySelector('.title').addEventListener('click', () => {
             //show dropdown
@@ -38,5 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     categoriesBtn.addEventListener('click', () => {
         sidebar.classList.add('expand')
+    })
+
+    sidebarCloseBtn.addEventListener('click', () => {
+        console.log('fffffff')
+        sidebar.classList.remove('expand')
     })
 })

@@ -101,11 +101,13 @@
 }
 .hero .products-row .filter-row .filter-dropdown .dropdown .dropdown-item {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
   font-weight: 600;
   transition: none;
   color: white;
+  text-align: left;
+  text-transform: capitalize;
 }
 .hero
   .products-row

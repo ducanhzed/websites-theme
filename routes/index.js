@@ -12,7 +12,6 @@ const websiteService = new WebsiteService();
 const newsService = new NewsService();
 
 const mongoose = require('mongoose')
-const mongooseConnecting = require('../services/mongooseConnecting')
 
 var router = express.Router();
 
@@ -59,6 +58,7 @@ router.get('/danh-muc-websites', async function (req, res, next) {
   console.log(query)
 
   //getting data by query
+
   const menu = await getMenu()
 
   //for pagination
@@ -78,9 +78,9 @@ router.get('/danh-muc-websites', async function (req, res, next) {
     websitesPaginationArr.push(i);
   }
 
-  //console.log(websitesPaginationArr)
-  //console.log(numOfWebsites)
-  //console.log(tagsOrKeyWordsForNews)
+  console.log(websitesPaginationArr)
+  console.log(numOfWebsites)
+  console.log(tagsOrKeyWordsForNews)
 
   res.render('category-product', { title: 'Danh mục Website', menu, websites, news, websitesPaginationArr });
 });
@@ -91,15 +91,12 @@ router.get('/editor-js', function (req, res, next) {
 
 
 router.get('/', async function (req, res, next) {
-
   const newWebsites = await websiteService.findNewWebsite();
   const careWebsites = await websiteService.findNewWebsite(2);
   const worldWebsites = await websiteService.findNewWebsite(3);
   const news = await newsService.getNews();
   let menu = await getMenu()
-  const [a, b, c] = await Promise.all([
 
-  ])
   //console.log(req.headers);
 
   res.render('index', {

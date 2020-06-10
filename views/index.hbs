@@ -33,73 +33,9 @@
                     <div class="line"></div>
                     <div class="dot"></div>
                 </div>
-                <div class="filter-row">
-                    <div class="filter-dropdown">
-                        <div class="title">
-                            XU HƯỚNG <i class="fas fa-caret-down"></i>
-                        </div>
-                        <div class="dropdown">
-                            <div class="dropdown-item">item-1</div>
-                            <div class="dropdown-item">item-2</div>
-                            <div class="dropdown-item">item-3</div>
-                            <div class="dropdown-item">item-4</div>
-                            <div class="dropdown-item">item-5</div>
-                            <div class="dropdown-item">item-6</div>
-                        </div>
-                    </div>
-                    <div class="filter-dropdown">
-                        <div class="title">
-                            LÃNH VỰC <i class="fas fa-caret-down"></i>
-                        </div>
-                        <div class="dropdown">
-                            <div class="dropdown-item">item-1</div>
-                            <div class="dropdown-item">item-2</div>
-                            <div class="dropdown-item">item-3</div>
-                            <div class="dropdown-item">item-4</div>
-                            <div class="dropdown-item">item-5</div>
-                            <div class="dropdown-item">item-6</div>
-                        </div>
-                    </div>
-                    <div class="filter-dropdown">
-                        <div class="title">
-                            MÀU SẮC <i class="fas fa-caret-down"></i>
-                        </div>
-                        <div class="dropdown">
-                            <div class="dropdown-item">item-1</div>
-                            <div class="dropdown-item">item-2</div>
-                            <div class="dropdown-item">item-3</div>
-                            <div class="dropdown-item">item-4</div>
-                            <div class="dropdown-item">item-5</div>
-                            <div class="dropdown-item">item-6</div>
-                        </div>
-                    </div>
-                    <div class="filter-dropdown">
-                        <div class="title">
-                            SỐ LƯỢNG CỘT <i class="fas fa-caret-down"></i>
-                        </div>
-                        <div class="dropdown">
-                            <div class="dropdown-item">item-1</div>
-                            <div class="dropdown-item">item-2</div>
-                            <div class="dropdown-item">item-3</div>
-                            <div class="dropdown-item">item-4</div>
-                            <div class="dropdown-item">item-5</div>
-                            <div class="dropdown-item">item-6</div>
-                        </div>
-                    </div>
-                    <div class="filter-dropdown">
-                        <div class="title">
-                            ĐẤT NƯỚC <i class="fas fa-caret-down"></i>
-                        </div>
-                        <div class="dropdown">
-                            <div class="dropdown-item">item-1</div>
-                            <div class="dropdown-item">item-2</div>
-                            <div class="dropdown-item">item-3</div>
-                            <div class="dropdown-item">item-4</div>
-                            <div class="dropdown-item">item-5</div>
-                            <div class="dropdown-item">item-6</div>
-                        </div>
-                    </div>
-                </div>
+
+                {{> filterRow}}
+
                 <div class="products-grid">
                     {{#each newWebsites}}
                     <a class="product" href="/websites/{{_id}}">
@@ -139,73 +75,9 @@
                     <div class="line"></div>
                     <div class="dot"></div>
                 </div>
-                <div class="filter-row">
-                    <div class="filter-dropdown">
-                        <div class="title">
-                            XU HƯỚNG <i class="fas fa-caret-down"></i>
-                        </div>
-                        <div class="dropdown">
-                            <div class="dropdown-item">item-1</div>
-                            <div class="dropdown-item">item-2</div>
-                            <div class="dropdown-item">item-3</div>
-                            <div class="dropdown-item">item-4</div>
-                            <div class="dropdown-item">item-5</div>
-                            <div class="dropdown-item">item-6</div>
-                        </div>
-                    </div>
-                    <div class="filter-dropdown">
-                        <div class="title">
-                            LÃNH VỰC <i class="fas fa-caret-down"></i>
-                        </div>
-                        <div class="dropdown">
-                            <div class="dropdown-item">item-1</div>
-                            <div class="dropdown-item">item-2</div>
-                            <div class="dropdown-item">item-3</div>
-                            <div class="dropdown-item">item-4</div>
-                            <div class="dropdown-item">item-5</div>
-                            <div class="dropdown-item">item-6</div>
-                        </div>
-                    </div>
-                    <div class="filter-dropdown">
-                        <div class="title">
-                            MÀU SẮC <i class="fas fa-caret-down"></i>
-                        </div>
-                        <div class="dropdown">
-                            <div class="dropdown-item">item-1</div>
-                            <div class="dropdown-item">item-2</div>
-                            <div class="dropdown-item">item-3</div>
-                            <div class="dropdown-item">item-4</div>
-                            <div class="dropdown-item">item-5</div>
-                            <div class="dropdown-item">item-6</div>
-                        </div>
-                    </div>
-                    <div class="filter-dropdown">
-                        <div class="title">
-                            SỐ LƯỢNG CỘT <i class="fas fa-caret-down"></i>
-                        </div>
-                        <div class="dropdown">
-                            <div class="dropdown-item">item-1</div>
-                            <div class="dropdown-item">item-2</div>
-                            <div class="dropdown-item">item-3</div>
-                            <div class="dropdown-item">item-4</div>
-                            <div class="dropdown-item">item-5</div>
-                            <div class="dropdown-item">item-6</div>
-                        </div>
-                    </div>
-                    <div class="filter-dropdown">
-                        <div class="title">
-                            ĐẤT NƯỚC <i class="fas fa-caret-down"></i>
-                        </div>
-                        <div class="dropdown">
-                            <div class="dropdown-item">item-1</div>
-                            <div class="dropdown-item">item-2</div>
-                            <div class="dropdown-item">item-3</div>
-                            <div class="dropdown-item">item-4</div>
-                            <div class="dropdown-item">item-5</div>
-                            <div class="dropdown-item">item-6</div>
-                        </div>
-                    </div>
-                </div>
+
+                {{> filterRow}}
+
                 <div class="products-grid">
                     {{#each careWebsites}}
                     <a class="product" href="/websites/{{_id}}">
@@ -245,73 +117,9 @@
                     <div class="line"></div>
                     <div class="dot"></div>
                 </div>
-                <div class="filter-row">
-                    <div class="filter-dropdown">
-                        <div class="title">
-                            XU HƯỚNG <i class="fas fa-caret-down"></i>
-                        </div>
-                        <div class="dropdown">
-                            <div class="dropdown-item">item-1</div>
-                            <div class="dropdown-item">item-2</div>
-                            <div class="dropdown-item">item-3</div>
-                            <div class="dropdown-item">item-4</div>
-                            <div class="dropdown-item">item-5</div>
-                            <div class="dropdown-item">item-6</div>
-                        </div>
-                    </div>
-                    <div class="filter-dropdown">
-                        <div class="title">
-                            LÃNH VỰC <i class="fas fa-caret-down"></i>
-                        </div>
-                        <div class="dropdown">
-                            <div class="dropdown-item">item-1</div>
-                            <div class="dropdown-item">item-2</div>
-                            <div class="dropdown-item">item-3</div>
-                            <div class="dropdown-item">item-4</div>
-                            <div class="dropdown-item">item-5</div>
-                            <div class="dropdown-item">item-6</div>
-                        </div>
-                    </div>
-                    <div class="filter-dropdown">
-                        <div class="title">
-                            MÀU SẮC <i class="fas fa-caret-down"></i>
-                        </div>
-                        <div class="dropdown">
-                            <div class="dropdown-item">item-1</div>
-                            <div class="dropdown-item">item-2</div>
-                            <div class="dropdown-item">item-3</div>
-                            <div class="dropdown-item">item-4</div>
-                            <div class="dropdown-item">item-5</div>
-                            <div class="dropdown-item">item-6</div>
-                        </div>
-                    </div>
-                    <div class="filter-dropdown">
-                        <div class="title">
-                            SỐ LƯỢNG CỘT <i class="fas fa-caret-down"></i>
-                        </div>
-                        <div class="dropdown">
-                            <div class="dropdown-item">item-1</div>
-                            <div class="dropdown-item">item-2</div>
-                            <div class="dropdown-item">item-3</div>
-                            <div class="dropdown-item">item-4</div>
-                            <div class="dropdown-item">item-5</div>
-                            <div class="dropdown-item">item-6</div>
-                        </div>
-                    </div>
-                    <div class="filter-dropdown">
-                        <div class="title">
-                            ĐẤT NƯỚC <i class="fas fa-caret-down"></i>
-                        </div>
-                        <div class="dropdown">
-                            <div class="dropdown-item">item-1</div>
-                            <div class="dropdown-item">item-2</div>
-                            <div class="dropdown-item">item-3</div>
-                            <div class="dropdown-item">item-4</div>
-                            <div class="dropdown-item">item-5</div>
-                            <div class="dropdown-item">item-6</div>
-                        </div>
-                    </div>
-                </div>
+
+                {{> filterRow}}
+
                 <div class="products-grid">
                     {{#each worldWebsites}}
                     <a class="product" href="/websites/{{_id}}">
@@ -366,73 +174,9 @@
                     <div class="line"></div>
                     <div class="dot"></div>
                 </div>
-                <div class="filter-row">
-                    <div class="filter-dropdown">
-                        <div class="title">
-                            XU HƯỚNG <i class="fas fa-caret-down"></i>
-                        </div>
-                        <div class="dropdown">
-                            <div class="dropdown-item">item-1</div>
-                            <div class="dropdown-item">item-2</div>
-                            <div class="dropdown-item">item-3</div>
-                            <div class="dropdown-item">item-4</div>
-                            <div class="dropdown-item">item-5</div>
-                            <div class="dropdown-item">item-6</div>
-                        </div>
-                    </div>
-                    <div class="filter-dropdown">
-                        <div class="title">
-                            LÃNH VỰC <i class="fas fa-caret-down"></i>
-                        </div>
-                        <div class="dropdown">
-                            <div class="dropdown-item">item-1</div>
-                            <div class="dropdown-item">item-2</div>
-                            <div class="dropdown-item">item-3</div>
-                            <div class="dropdown-item">item-4</div>
-                            <div class="dropdown-item">item-5</div>
-                            <div class="dropdown-item">item-6</div>
-                        </div>
-                    </div>
-                    <div class="filter-dropdown">
-                        <div class="title">
-                            MÀU SẮC <i class="fas fa-caret-down"></i>
-                        </div>
-                        <div class="dropdown">
-                            <div class="dropdown-item">item-1</div>
-                            <div class="dropdown-item">item-2</div>
-                            <div class="dropdown-item">item-3</div>
-                            <div class="dropdown-item">item-4</div>
-                            <div class="dropdown-item">item-5</div>
-                            <div class="dropdown-item">item-6</div>
-                        </div>
-                    </div>
-                    <div class="filter-dropdown">
-                        <div class="title">
-                            SỐ LƯỢNG CỘT <i class="fas fa-caret-down"></i>
-                        </div>
-                        <div class="dropdown">
-                            <div class="dropdown-item">item-1</div>
-                            <div class="dropdown-item">item-2</div>
-                            <div class="dropdown-item">item-3</div>
-                            <div class="dropdown-item">item-4</div>
-                            <div class="dropdown-item">item-5</div>
-                            <div class="dropdown-item">item-6</div>
-                        </div>
-                    </div>
-                    <div class="filter-dropdown">
-                        <div class="title">
-                            ĐẤT NƯỚC <i class="fas fa-caret-down"></i>
-                        </div>
-                        <div class="dropdown">
-                            <div class="dropdown-item">item-1</div>
-                            <div class="dropdown-item">item-2</div>
-                            <div class="dropdown-item">item-3</div>
-                            <div class="dropdown-item">item-4</div>
-                            <div class="dropdown-item">item-5</div>
-                            <div class="dropdown-item">item-6</div>
-                        </div>
-                    </div>
-                </div>
+
+                {{> filterRow}}
+
                 <div class="products-grid news">
                     {{#each news}}
                     <a class="product" href="/tin-tuc/{{_id}}">
@@ -468,9 +212,9 @@
         </div>
         <!-- END NEWS FEED -->
         <!-- BANNER -->
-        <div class="banner">
+        {{!-- <div class="banner">
             <img src="./images/ourteam.PNG" alt="super-team">
-        </div>
+        </div> --}}
         <!-- END BANNER -->
     </div>
     <!-- END MAIN CONTENT -->
@@ -478,6 +222,7 @@
     <!-- FOOTER -->
     {{> footer}}
     <!-- END FOOTER -->
+    <script src="/javascripts/homepage.js"></script>
 </body>
 
 </html>

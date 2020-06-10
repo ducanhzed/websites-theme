@@ -1,0 +1,74 @@
+<div class="form-container">
+    <form id="filter-form" action="">
+        <div class="custom-select">
+            <div class="key">
+                xu hướng
+            </div>
+            <select class="selection">
+                <option class="value" value="" >Bất kỳ</option>
+                {{#each menu.trends}}
+                <option class="value" value="trend={{this.name}}">{{this.name}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="custom-select">
+            <div class="key">
+                Lĩnh vực
+            </div>
+            <select class="selection">
+                <option class="value" value="" >Bất kỳ</option>
+                {{#each menu.fields}}
+                <option class="value" value="field={{this.name}}">{{this.name}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="custom-select">
+            <div class="key">
+                Màu sắc
+            </div>
+            <select class="selection">
+                <option class="value" value="" >Bất kỳ</option>
+                {{#each menu.colors}}
+                <option class="value" value="color={{this.name}}">{{this.name}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="custom-select">
+            <div class="key">
+                Số Lượng Cột
+            </div>
+            <select class="selection">
+                <option class="value" value="" >Bất kỳ</option>
+                {{#each menu.cols}}
+                <option class="value" value="numOfCols={{this}}">{{this}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="custom-select">
+            <div class="key">
+                Đất nước
+            </div>
+            <select class="selection">
+                <option class="value" value="" >Bất kỳ</option>
+                {{#each menu.countries}}
+                <option class="value" value="country={{this.name}}">{{this.name}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="custom-select">
+            <div class="key">
+                Giá Thấp Nhất
+            </div>
+            <input id="lowPrice" class="selection" value="0" type="number" step="100000" min=0 />
+        </div>
+        <div class="custom-select">
+            <div class="key">
+                Giá Cao Nhất
+            </div>
+            <input id="highPrice" class="selection" value="99999999" type="number" step="100000" min=0 />
+        </div>
+    </form>
+    <div class="submit">
+        <button type="submit">Lọc</button>
+    </div>
+</div>

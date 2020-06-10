@@ -26,17 +26,23 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 mongoose.connect(process.env.DB_URI || 'mongodb://localhost:27017/websiteTheme', {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-    //useMongoClient: true
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+}, (err) => {
+  if (!err) {
+    console.log('MongoDB Connection Succeeded.')
+  } else {
+    console.log('Error in DB connection: ' + err)
+    throw new Error(err);
+  }
 });
 
- mongoose.connection.once('open', () => {
-  server.listen(port, '192.168.1.123'); //IPv4 Port Local Wireless
+mongoose.connect('once', () => {
+  server.listen(port, '192.168.1.7'); //IPv4 Port Local Wireless
   server.on('error', onError);
   server.on('listening', onListening);
- });
+})
 
 
 /**

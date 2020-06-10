@@ -10,12 +10,17 @@ const router = express.Router();
 dotenv.config();
 
 router.get('/', async function (req, res, next) {
-    let userAgent = req.headers['user-agent'];
+    let userAgent = req.headers;
     console.log(userAgent)
     res.status(200).send({ msg: 'success' })
 })
 
 router.get('/count-websites', async function (req, res, next) {
+
     res.json({'response': await Websites.countDocuments()});
+})
+
+router.get('/websites', async function (req, res, next) {
+    res.json(await Websites.find().lean());
 })
 module.exports = router
