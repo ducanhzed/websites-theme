@@ -8,11 +8,12 @@ let hbs = require('hbs')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const dataRouter = require('./routes/data');
-
-
+const adminRouter = require('./routes/admin');
+const mongoConnect = require('connect-mongo');
 var app = express();
 
 // view engine setup
+hbs.registerHelper('myIf', require('./services/hbs').myIf);
 hbs.registerHelper('dd_mm_yyyy', function (value, options) {
   let date = new Date(`${value}`)
   return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
@@ -40,6 +41,7 @@ app.use('/static/image.js', express.static('./node_modules/@editorjs/image/dist/
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/data', dataRouter);
+app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
