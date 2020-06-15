@@ -24,3 +24,7 @@ exports.myIf = function (v1, operators, v2, options) {
             return options.inverse(this);
     }
 }
+
+exports.formatNumber = function(n) {
+    return String(n).replace(/(.)(?=(\d{3})+$)/g,'$1,')
+}

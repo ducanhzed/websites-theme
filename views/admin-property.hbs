@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="vn">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="vn">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{{title}}</title>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <link rel="shortcut icon" type="image/png" href="favicon.png" />
+    <link href="/stylesheets/admin.css" rel="stylesheet">
+    <link href="/stylesheets/admin-index.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+        {{> admin_header}}
+        <div class="app-main">
+            {{> admin_sidebar}}
+             <div class="app-main__outer">
+               <div class="app-main__inner">
+                    <div class="row">
+                        <div class="col-md-12">
+                             <div class="main-card mb-3 card">
+                                <div class="card-header">Search {{type}}</div>
+                                <form action="/admin/property/{{originalType}}" class="input-group p-3 form_search_property">
+                                    <input type="text" class="form-control" placeholder="Search name">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-success">
+                                            <i class="pe-7s-search"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                             </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-md-12">
+                                <div class="main-card mb-3 card">
+                                    <div class="card-header">List of {{type}}
+                                        <div class="ml-md-5">
+                                            <span id='countDocument'>{{count}}</span> / <span id='totalCountDocument'>{{totalCount}} </span>
+                                        </div>                  
+                                        <div class="btn-actions-pane-right">
+                                            <div role="group" class="btn-group-sm btn-group">
+                                                <button class="btn-wide btn btn-success mr-3" data-toggle="modal" data-target="#add">
+                                                    Add
+                                                </button>
+                                                <button class="btn-wide btn btn-outline-danger disabled btn-remove" data-toggle="modal" data-target="#remove">
+                                                    Remove
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center">
+                                                         <div class="widget-content p-0">
+                                                            <input type="checkbox" class="" data-checked='all' />
+                                                         </div>
+                                                    </th>
+                                                    <th>Name</th>
+                                                    <th class="text-center">Quantity</th>
+                                                    <th class="text-center">Actions</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {{#each data}}
+                                                        <tr id="{{_id}}">
+                                                            <td class="text-center">
+                                                                <div class="widget-content px-1 py-0">
+                                                                    <input type="checkbox" class="" data-id="{{_id}}" />
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="widget-content p-0">
+                                                                    <div class="widget-content-wrapper">
+                                                                        <div class="widget-content-left flex2">
+                                                                            <div class="widget-heading">{{name}}</div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-center">{{quantity}}</td>
+                                                            <td class="text-center">
+                                                                <button type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modify" data-id="{{_id}}" data-name="{{name}}">Modify</button>
+                                                            </td>
+                                                        </tr>
+                                                    {{/each}}
+                                                </tbody>
+                                        </table>
+                                    </div>
+                                        {{#myIf count "<" totalCount}}
+                                            <div class="d-block text-center card-footer" id="load_more">
+                                                <button class="btn-wide btn btn-success" data-name="">Load more</button>
+                                            </div>
+                                        {{/myIf}}
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/javascripts/jQuery.min.js"></script>
+    <script type="text/javascript" src="/javascripts/admin.js"></script>
+    <script type="text/javascript" src="/javascripts/admin-minh.js"></script>
+
+    <div class="modal fade" id="remove" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Remove {{type}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure to remove these {{type}}?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger">Remove</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add {{type}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class='ml-1'>Name of {{type}}</p>
+                <input type='text' placeholder='Name' name='name' class='form-control' />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success">Add</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modify" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modify {{type}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class='mb-3 ml-1'>Old name: <strong id='name'></strong></p>
+                <input type='text' placeholder='New Name' name='name' class='form-control' />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary btn-save">Save</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+                

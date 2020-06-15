@@ -7,7 +7,7 @@ const news = new mongoose.Schema({
     author: {type: String, required: false},  //
     createdDate: {type: Date, default: new Date, required: true},
     /* Số người view news, tăng thêm khi có người vào */
-    points: [{type: Number, require: true, default: 0}],
+    points: [{type: Number, require: true, default: 0, max: 9999}],
     /* Thêm tùy ý, ajax tìm */
     tags: [String], //
     /* Thêm tùy ý, ko tìm ajax */

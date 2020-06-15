@@ -14,6 +14,7 @@ var app = express();
 
 // view engine setup
 hbs.registerHelper('myIf', require('./services/hbs').myIf);
+hbs.registerHelper('formatNumber', require('./services/hbs').formatNumber);
 hbs.registerHelper('dd_mm_yyyy', function (value, options) {
   let date = new Date(`${value}`)
   return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
