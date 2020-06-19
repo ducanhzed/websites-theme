@@ -4,7 +4,10 @@ const mongoose = require('mongoose')
 const website = new mongoose.Schema({
     _id: { type: String, required: true },
     name: { type: String, minlength: 6, required: true },
-    images: [{ type: String, required: true }, { type: String, required: true }, { type: String, required: true }],
+    images: {
+        type: [{ type: String, required: true }],
+        validate: [(val) => val.length === 3, 'images need an array with length of 3']
+    },
     author: { type: String, required: true },
     field: { type: String, required: true },
     details: { type: mongoose.Types.ObjectId, require: true }, // post model

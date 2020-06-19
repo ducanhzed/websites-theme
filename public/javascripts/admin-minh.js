@@ -31,15 +31,17 @@ $("#loginForm").on('submit', function () {
     return false;
 })
 
-// $('.scrollbar-sidebar a').each(function () {
-//     const element = $(this);
-//     if (element.attr('href') === window.location.pathname)
-//         element.addClass('mm-active');
-// })
+$(window).on('load', function (e) {
+    $('.scrollbar-sidebar a').each(function () {
+        const element = $(this);
+        if (element.attr('href') === window.location.pathname) {
+            element.addClass('mm-active');
 
-// Aria-expand -> list sidebar
-
-
+            const liParent = element.parents('li.customDropdown');
+            if (liParent.length) setTimeout(() => liParent.find('a[href="#"]').get(0).click(), 100);
+        }
+    });
+});
 
 // Content of create-news
 if ($('#content').length) {
@@ -108,12 +110,6 @@ $(document).on('click', function () {
     $('.inputDropdown').addClass('disabled');
 });
 
-// Handle Create Website / News
-$(document).on('submit', 'form.form_create', function (e) {
-    //AJAX SUBMIT
-    return false;
-});
-
 // Handle Search Property
 $(document).on('submit', 'form.form_search_property', function (e) {
     $('table tbody').html('<tr><td colspan="4" style="padding: 100px 0"><div class="center"><div class="sbl-circ"></div></div></td></tr>');
@@ -143,9 +139,6 @@ $(document).on('submit', 'form.form_search_property', function (e) {
                             </div>
                         </td>
                         <td class="text-center">${property.quantity}</td>
-                        <td class="text-center">
-                            <button type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modify" data-id="${property._id}" data-name="${property.name}">Modify</button>
-                        </td>
                     </tr>
                 `);
             });
@@ -192,9 +185,6 @@ $(document).on('click', '#load_more > button', function (e) {
                             </div>
                         </td>
                         <td class="text-center">${property.quantity}</td>
-                        <td class="text-center">
-                            <button type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modify" data-id="${property._id}" data-name="${property.name}">Modify</button>
-                        </td>
                     </tr>
                 `);
             });
@@ -217,16 +207,8 @@ $(document).on('click', '#load_more > button', function (e) {
 // Add Property button 
 $(document).on('click', 'button[data-target="#add"]', function (e) {
     const id = $(this).attr('data-target');
-    $(id).find('input').val('');
-});
-
-// Modify property button
-$(document).on('click', 'button[data-target="#modify"]', function (e) {
-    const id = $(this).attr('data-target');
-    const oldName = $(this).attr('data-name');
-
-    $(id).find('#name').html(oldName);
-    $(id).find('.btn-save').attr('data-id', $(this).attr('data-id'));
+    $(id).find('input[name="name"]').val('');
+    $(id).find('.message').html('');
 });
 
 // Format number
@@ -381,7 +363,7 @@ $(document).on('submit', '.form_search_news', function (e) {
     $('#totalCountDocument').html('');
     $('#countDocument').html('');
 
-    const input_name = ['name', 'author', 'tags', 'keywords', 'minPoint', 'maxPoint'];
+    const input_name = ['title', 'author', 'tags', 'keywords'];
     let url = '/admin/news?';
     input_name.forEach((input, id) => {
         const value = $('.form_search_news input[name="' + input + '"]').val();
@@ -393,15 +375,48 @@ $(document).on('submit', '.form_search_news', function (e) {
     $.ajax({
         url: url,
         success: function (res) {
-
+            $('table tbody').html('');
+            res.data.forEach(new_instance => {
+                $('table tbody').append(`
+                    <tr id="${new_instance._id}">
+                        <td class="text-center">
+                            <div class="widget-content px-1 py-0">
+                                <input type="checkbox" class="" data-id="${new_instance._id}" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="widget-content p-0">
+                                <div class="widget-content-wrapper">
+                                    <div class="widget-content-left flex2">
+                                        <div class="widget-heading">${new_instance.title}</div>
+                                        <div class="widget-subheading opacity-7">${new_instance.author}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="text-center">${new_instance.points}</td>
+                        <td class="text-center">
+                            <a href='/admin/news/modify/${new_instance._id}' type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Modify</a>
+                        </td>
+                    </tr>
+                `);
+            });
+            $('#totalCountDocument').html(res.totalCount);
+            $('#countDocument').html(res.count);
+            if ($('#load_more_web-news').length) {
+                if (res.count < res.totalCount) $('#load_more_web-news').addClass('d-block').removeClass('d-none');
+                else $('#load_more_web-news').removeClass('d-block').addClass('d-none');
+            }
         }, error: function (err) {
-
+            $('table tbody').html('<tr><td colspan="4" style="padding: 100px 0"><p class="m-0 w-100 text-center font-weight-bold">Error</p></td></tr>');
+            console.log(err);
         }
     })
 
     return false;
 })
 
+// Type ahead ajax tags and keywords
 if (window.Bloodhound) {
     $('#keywords').tagsinput({
         trimValue: true,
@@ -422,7 +437,7 @@ if (window.Bloodhound) {
     });
 }
 
-
+// Preview image when upload 
 $('#avatar').change(function () {
     var reader = new FileReader();
     reader.onload = function (e) {
@@ -432,8 +447,9 @@ $('#avatar').change(function () {
     reader.readAsDataURL(this.files[0]);
 });
 
-$('#images').change(function () {
+$('#images').change(function (e) {
     var countFiles = $(this)[0].files.length;
+
     $('.images-preview').removeClass('d-none');
     $('.images-preview').html('');
 
@@ -448,4 +464,195 @@ $('#images').change(function () {
         }
         reader.readAsDataURL($(this)[0].files[i]);
     }
+});
+
+$('input[data-name="images_modify"]').change(function (e) {
+    var input = this;
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        const id = $(input).attr('id');
+        $(`label[for="${id}"] .preview_modify_website img`).attr('src', e.target.result);
+    };
+    reader.readAsDataURL(this.files[0]);
+})
+
+// Add property
+$(document).on('submit', '#add form', function () {
+    let button = $(this).find('button[type="submit"]');
+    let name = $(this).find('input[name="name"]').val();
+    let csrf = $(this).find('input[name="_csrf"]').val();
+
+    let message_container = $(this).find('.message');
+    message_container.html('');
+
+    if (!name) message_container.html('<div class="alert alert-danger fade show" role="alert"><strong>Error</strong> - Name is required!</div>');
+    else {
+        $(button).addClass('disabled');
+        $.ajax({
+            url: $(this).attr('action'),
+            method: 'POST',
+            data: { name: name, _csrf: csrf },
+            success: function (res) {
+                $(button).removeClass('disabled');
+                message_container.html('');
+                message_container.html(`<div class="alert alert-success fade show" role="alert"><strong>Success</strong> - ${res.message}</div>`);
+
+                $('table tbody').append(`
+                    <tr id="${res.new_property._id}">
+                        <td class="text-center">
+                            <div class="widget-content px-1 py-0">
+                                <input type="checkbox" class="" data-id="${res.new_property._id}" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="widget-content p-0">
+                                <div class="widget-content-wrapper">
+                                    <div class="widget-content-left flex2">
+                                        <div class="widget-heading">${res.new_property.name}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="text-center">${res.new_property.quantity}</td>
+                    </tr>
+                `);
+                $('#countDocument').html(Number($('#countDocument').text()) + 1);
+                $('#totalCountDocument').html(Number($('#totalCountDocument').text()) + 1);
+            }, error: function (err) {
+                $(button).removeClass('disabled');
+                message_container.html('');
+                message_container.html(`<div class="alert alert-danger fade show" role="alert"><strong>Error</strong> - ${err.responseJSON.error}</div>`);
+            }
+        });
+    }
+    return false;
+});
+
+// Button remove
+$('.btn-remove').on('click', function () {
+    const id = $(this).attr('data-target');
+    const type = $(`${id} .modal-footer button.btn-danger`).attr('data-type');
+
+    $(`${id} .modal-footer button.btn-danger`).html('Remove');
+    $(`${id} .modal-footer button.btn-danger`).removeClass('disabled');
+    $(`${id} .modal-footer`).removeClass('d-none');
+    $(`${id} .modal-body`).html('Are you sure to remove these ' + type + '?');
+});
+
+// Delete new and websites
+$(document).on('click', '#remove_website_new', function () {
+    const ids = [], url = $(this).attr('data-url'), _csrf = $('input[name="_csrf"]').val(), type = $(this).attr('data-type');
+    $('tbody tr.active').each(function () {
+        ids.push($(this).attr('id'));
+    });
+
+    $(this).html('Removing...');
+    $(this).addClass('disabled');
+
+    $.ajax({
+        url: url,
+        method: 'POST',
+        contentType: "application/json",
+        data: JSON.stringify({ ids, _csrf }),
+        success: function (res) {
+            $('tbody tr.active').remove();
+
+            $('#countDocument').html(Number($('#countDocument').text()) - res.countDelete);
+            $('#totalCountDocument').html(Number($('#totalCountDocument').text()) - res.countDelete);
+
+            $('.btn-remove').addClass('disabled');
+            $('#form_remove_web_new').find('.modal-footer').addClass('d-none');
+            $('#form_remove_web_new').find('.modal-body').html(res.message || ' Removed ' + type + ' successfully');
+
+        }, error: function (err) {
+            console.log(err);
+            $('#form_remove_web_new').find('.modal-footer').addClass('d-none');
+            $('#form_remove_web_new').find('.modal-body').html(err.message || ' Sorry, something went wrong with our server');
+        }
+    })
+});
+
+
+
+// Delete property
+$(document).on('click', '#remove_property', function (e) {
+    const ids = [], url = $(this).attr('data-url'), _csrf = $('input[name="_csrf"]').val();
+    $('tbody tr.active').each(function () {
+        ids.push($(this).attr('id'));
+    });
+
+    $(this).html('Removing...');
+    $(this).addClass('disabled');
+
+    $.ajax({
+        url: url,
+        method: 'POST',
+        contentType: "application/json",
+        data: JSON.stringify({ ids, _csrf }),
+        success: function (res) {
+            $('tbody tr.active').remove();
+
+            $('#countDocument').html(Number($('#countDocument').text()) - res.countDelete);
+            $('#totalCountDocument').html(Number($('#totalCountDocument').text()) - res.countDelete);
+
+            $('.btn-remove').addClass('disabled');
+            $('#remove').find('.modal-footer').addClass('d-none');
+            $('#remove').find('.modal-body').html(res.message || ' Removed successfully');
+
+        }, error: function (err) {
+            console.log(err);
+            $('#remove').find('.modal-footer').addClass('d-none');
+            $('#remove').find('.modal-body').html(err.message || ' Sorry, something went wrong with our server');
+        }
+    })
+});
+
+// Load more user
+$(document).on('click', '#load_more_user button', function () {
+    const button = this;
+    const skip = $('table tbody > tr').length;
+    const url = $(this).attr('data-url') + 'skip=' + skip;
+
+
+    $(button).html('Loading');
+    $(button).addClass('disabled');
+
+    $.ajax({
+        url: url,
+        success: function (res) {
+            console.log(res);
+            res.users.forEach(user => {
+                $('table tbody').append(`
+                    <tr id=${user._id}>
+                        <td></td>
+                            <td>
+                            <div class="widget-content p-0">
+                                <div class="widget-content-wrapper">
+                                    <div class="widget-content-left flex2">
+                                        <div class="widget-heading">${user.name}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="text-center">${user.role}</td>
+                        <td class="text-center">
+                            <a href='/admin/user/modify/${user._id}' type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Modify</a>
+                        </td>
+                    </tr>
+                `);
+            })
+
+            $('#countDocument').html(Number($('#countDocument').text()) + res.count);
+            if ($('#countDocument').text() < res.totalCount)
+                $('#load_more_user').addClass('d-block').removeClass('d-none');
+            else $('#load_more_user').removeClass('d-block').addClass('d-none');
+
+            $(button).html('Load more');
+            $(button).removeClass('disabled');
+        }, error: function (err) {
+            $(button).html('Load more');
+            $(button).removeClass('disabled');
+            console.log(err);
+        }
+    })
 });

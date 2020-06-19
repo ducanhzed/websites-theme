@@ -1,7 +1,7 @@
 <div class="app-header header-shadow">
     <div class="app-header__logo">
         <div class="logo-src">
-            <h4>KUMOP</h4>
+            <h4><a href='/admin' style="color: #343a40; text-decoration: none">KUMOP</a></h4>
         </div>
         <div class="header__pane ml-auto">
             <div>
@@ -77,9 +77,8 @@
                             </div>
                         </div>
                         <div class="widget-content-left  ml-3 header-user-info">
-                            <div class="widget-heading">
-                                Admin
-                            </div>
+                            <div class="widget-heading">{{user.name}}</div>
+                            <div class="widget-subheading opacity-7">{{user.cap_role}}</div>
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="vn">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="vn">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{{title}}</title>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <link rel="shortcut icon" type="image/png" href="favicon.png" />
+    <link href="/stylesheets/admin.css" rel="stylesheet">
+    <link href="/stylesheets/admin-index.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+        {{> admin_header}}
+        <div class="app-main">
+            {{> admin_sidebar}}
+             <div class="app-main__outer">
+               <div class="app-main__inner">
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2 card">
+                            <div class="card-header">CHANGE ROLE OF USER</div>
+                            {{#if haveMessage}}
+                                <div class="alert alert-{{message.[0].type}} fade show" role="alert">
+                                    {{#myIf message.[0].type '==' 'success'}}
+                                        <strong>Success</strong> - {{{message.[0].message}}}
+                                    {{else}}
+                                         {{#myIf message.[0].type '==' 'danger'}}
+                                                <strong>Error</strong> - {{{message.[0].message}}}
+                                         {{else}}
+                                                <strong>Info</strong> - {{{message.[0].message}}}
+                                         {{/myIf}}
+                                    {{/myIf}}
+                                </div>
+                            {{/if}}
+                            <form action="" class="p-3" method="POST">
+                                <div class="position-relative form-group">
+                                    <label for="name" class="">Username</label>
+                                    <input name="name" id="name" placeholder="" type="text" class="form-control" value="{{instance.name}}" disabled>
+                                </div>
+                                <div class="position-relative form-group">
+                                    <label class="">Role</label>
+                                    <div class="px-2 py-1">
+                                        <div class="custom-radio custom-control py-2">
+                                            <input 
+                                                {{#myIf instance.role '==' 'admin'}}
+                                                    checked
+                                                {{/myIf}}
+                                            type="radio" id="exampleCustomRadio" name="role" class="custom-control-input" value="admin">
+                                            <label class="custom-control-label" for="exampleCustomRadio">
+                                                Admin
+                                            </label>
+                                        </div>
+                                        <div class="custom-radio custom-control py-2">
+                                            <input 
+                                                {{#myIf instance.role '==' 'manager'}}
+                                                    checked
+                                                {{/myIf}}
+                                            type="radio" id="exampleCustomRadio2" name="role" class="custom-control-input" value="manager">
+                                            <label class="custom-control-label" for="exampleCustomRadio2">
+                                                Manager
+                                            </label>
+                                        </div>
+                                        <div class="custom-radio custom-control py-2">
+                                            <input 
+                                                {{#myIf instance.role '==' 'editor'}}
+                                                    checked
+                                                {{/myIf}}
+                                            type="radio" id="exampleCustomRadio3" name="role" class="custom-control-input" value="editor">
+                                            <label class="custom-control-label" for="exampleCustomRadio3">
+                                                Editor
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" value="{{csrfToken}}" name="_csrf" />
+                               <div class="d-block text-center card-footer">
+                                    <button class="btn-wide btn btn-primary">Save</button>
+                                    <a href='/admin/user' class="btn-wide btn btn-secondary">Cancel</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/javascripts/jQuery.min.js"></script>
+    <script type="text/javascript" src="/javascripts/admin.js"></script>
+    <script type="text/javascript" src="/javascripts/admin-minh.js"></script>
+</body>

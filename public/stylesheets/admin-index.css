@@ -83,3 +83,9 @@ button.disabled {
 .images-preview {
   width: 100%;
 }
+.scrollbar-sidebar {
+  overflow-y: scroll !important;
+}
+.scrollbar-sidebar::-webkit-scrollbar {
+  display: none;
+}

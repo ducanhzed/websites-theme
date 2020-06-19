@@ -4,7 +4,7 @@ const dotenv = require('dotenv')
 const change_alias = require('../services/change_alias')
 dotenv.config()
 
-const dataSet = ["thiết bị, dụng cụ",
+const dataSet = ["thiết bị - dụng cụ",
     "thiết kế in ấn",
     "nhà hàng - khách sạn",
     "thời trang",

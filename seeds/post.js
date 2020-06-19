@@ -19,7 +19,7 @@ mongoose.connect(process.env.DB_URI || 'mongodb://localhost:27017/websiteTheme',
         for (let i = 0; i < 1000; i++) {
             let seed = {
                 title: 'This is Post ' + Date.now(),
-                content: ['This is a heading', `<img src="./image.png"></img>`, "This is a content", "This is another content"],
+                content: '<h1>This is a heading</h1>' + `<img src="./image.png"></img>` + "<p>This is a content</p>" + "<p>This is another content</p>",
                 author: authors[Math.round(Math.random() * (authors.length - 1))],
             }
 

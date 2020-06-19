@@ -91,37 +91,29 @@
                                     {{else}}
                                          <form action="" class="p-3 form_search_news">
                                             <div class="form-row">
-                                                <div class="col-md-4">
+                                                <div class="col-md-6">
                                                     <div class="position-relative form-group">
-                                                        <label for="name" class="">Name</label>
-                                                        <input name="name" id="name" placeholder="" type="text" class="form-control">
+                                                        <label for="title" class="">Title</label>
+                                                        <input name="title" id="title" placeholder="" type="text" class="form-control">
                                                     </div>
                                                 </div>
-                                                 <div class="col-md-4">
+                                                 <div class="col-md-6">
                                                     <div class="position-relative form-group">
                                                         <label for="author" class="">Author</label>
                                                         <input name="author" id="author" placeholder="" type="text" class="form-control">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-6">
                                                      <div class="position-relative form-group tags">
                                                         <label for="tags" class="">Tags</label>
                                                         <input name="tags" id="tags" placeholder="" type="text" class="form-control" data-role="tagsinput">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-6">
                                                     <div class="position-relative form-group">
                                                         <label for="keywords" class="">Keywords</label>
                                                         <input name="keywords" id="keywords" placeholder="" type="text" class="form-control" data-role="tagsinput">     
                                                     </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label for="min_point">Views</label>
-                                                    <input name="minPoint" id="min_point" type="number" min="0" value="0" class="form-control"/>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label></label>
-                                                    <input name="maxPoint" type="number" min="0" value="9999999999" class="form-control"/>
                                                 </div>
                                             </div>
                                             <div class="d-block text-center card-footer">
@@ -141,7 +133,7 @@
                                         </div>                  
                                         <div class="btn-actions-pane-right">
                                             <div role="group" class="btn-group-sm btn-group">
-                                                <button class="btn-wide btn btn-outline-danger disabled btn-remove" data-toggle="modal" data-target="#exampleModal">
+                                                <button class="btn-wide btn btn-outline-danger disabled btn-remove" data-toggle="modal" data-target="#form_remove_web_new">
                                                     Remove
                                                 </button>
                                             </div>
@@ -246,7 +238,7 @@
     <script type="text/javascript" src="/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
     <script type="text/javascript" src="/javascripts/admin-minh.js"></script>
     
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="form_remove_web_new" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
@@ -259,8 +251,9 @@
                 Are you sure to remove these {{type}}?
             </div>
             <div class="modal-footer">
+                <input type="hidden" name="_csrf" value="{{csrfToken}}" />
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger">Remove</button>
+                <button type="button" class="btn btn-danger" data-type={{type}} data-url="/admin/{{type}}/delete" id="remove_website_new">Remove</button>
             </div>
             </div>
         </div>
