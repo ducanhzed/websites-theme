@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,600;1,100;1,300&display=swap"
+        rel="stylesheet">
+    <script src="/javascripts/fontawsome5/js/all.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/category-product.css">
+    <link rel="stylesheet" href="/stylesheets/main.css">
+</head>
+
+<body>
+    <!--- MAIN HEADER --->
+    {{> header}}
+    <!--- END MAIN HEADER --->
+
+    {{> sidebar}}
+
+    <div id="main-content">
+        {{> filterForm}}
+        <div class="hero">
+            {{#if websites}}
+            <div class="products-row">
+                {{!-- <h3 class="title">Mới Nhất</h3> --}}
+                <div class="title-divider">
+                    <div class="line"></div>
+                    <div class="dot"></div>
+                </div>
+                
+                <div class="products-grid">
+                    {{#each websites}}
+                    <a class="product" href="/websites/{{_id}}">
+                        <div class="product-card">
+                            <div class="img-wrapper">
+                                <img class="image" src="{{images.[0]}}" alt="">
+                            </div>
+                            <div class="content">
+                                <h3 class="name">{{name}}</h3>
+                                <div class="row">
+                                    <span class="location f-left" style="text-transform: capitalize;">Quốc gia :
+                                        {{country}}</span>
+                                    <span class="date f-right">{{#dd_mm_yyyy createdDate}}{{/dd_mm_yyyy}}</span>
+                                </div>
+                                <div class="row">
+                                    <section class="author f-left">
+                                        <div class="avatar">
+                                        </div>
+                                        <span class="auth-name"><strong>{{author}}</strong></span>
+                                    </section>
+                                    <div class="field f-right">
+                                        <span>{{field}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    {{/each}}
+                </div>
+            </div>
+            <div class="pagination">
+                {{#if websitesPaginationArr}}
+                <div class="pages">
+                    {{#each websitesPaginationArr}}
+                    <a data-pageNumber={{this}} class="page hide">{{this}}</a>
+                    {{/each}}
+                </div>
+                {{/if}}
+                {{!-- <div class="more">Show me more</div> --}}
+            </div>
+            {{/if}}
+
+        </div>
+        <!-- WEBSITE THEME LIST -->
+        {{> websiteThemeList}}
+        <!-- END WEBSITE THEME LIST -->
+
+        <!-- NEWS FEED -->
+        {{#if news}}
+        <div class="hero">
+            <div class="products-row news">
+                <h3 class="title">Tin Tức</h3>
+                <div class="title-divider">
+                    <div class="line"></div>
+                    <div class="dot"></div>
+                </div>
+
+                <div class="products-grid news">
+                    <!-- EACH NEWS --->
+                    {{#each news}}
+                    <a class="product" href="/tin-tuc/{{_id}}">
+                        <div class="product-card">
+                            <div class="img-wrapper">
+                                <img class="image" src="{{avatar}}" alt="">
+                            </div>
+                            <div class="content">
+                                <h3 class="name">{{title}}</h3>
+                                <div class="row">
+                                    <span class="tags f-left"><strong>Tags :</strong> {{#each tags}}
+                                        {{this}},{{/each}}...</span>
+                                    <span class="date f-right">{{#dd_mm_yyyy createdDate}}{{/dd_mm_yyyy}}</span>
+                                </div>
+                                <div class="row">
+                                    <section class="author f-left">
+                                        <div class="avatar">
+                                        </div>
+                                        <span class="auth-name"><strong>{{author}}</strong></span>
+                                    </section>
+                                    <div class="keywords f-right">
+                                        <div class="keyword">{{keywords.[0]}}</div>
+                                        <div class="keyword">{{keywords.[1]}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    {{/each}}
+                    <!-- END EACH NEWS --->
+                </div>
+            </div>
+        </div>
+        {{/if}}
+        <!-- END NEWS FEED -->
+    </div>
+
+    {{> footer}}
+    <!-- END FOOTER -->
+    <script src="/javascripts/category-product.js"></script>
+</body>
+
+</html>

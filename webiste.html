@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết sản phẩm</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Oswald:wght@200;300;400;500;600;700&display=swap');
+        @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
+
+        #main-content {
+            width: 100%;
+            min-height: 100%;
+            position: relative;
+            background: none;
+            display: block;
+        }
+
+        /* HERO */
+        .hero {
+            margin: 20px auto;
+            width: 100%;
+            min-height: 100vh;
+            z-index: -100;
+            font-size: 13px;
+            position: relative;
+        }
+
+        .hero>.title {
+            text-align: center;
+            font-family: "Oswald", sans-serif;
+            font-size: 2em;
+            letter-spacing: 2px;
+            font-weight: bolder;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .hero>.line {
+            width: 80%;
+            max-width: 400px;
+            height: 3px;
+            position: relative;
+            background: black;
+            margin: auto;
+            margin-bottom: 40px;
+        }
+
+        /* IMAGES GRID */
+        .images-grid {
+            width: 95%;
+            max-width: 1480px;
+            margin: auto;
+            position: relative;
+            font-size: 13px;
+            /* background: burlywood; */
+            min-height: 100px;
+            display: flex;
+            justify-content: space-between;
+            outline: none;
+            padding: 0;
+            transition: all 0.3s linear;
+            transform: translateY(-30px);
+            opacity: 0;
+        }
+
+        .images-grid.faded {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        .images-grid>.main {
+            width: 74%;
+            height: auto;
+        }
+
+        .images-grid>.main>.main-image {
+            width: 100%;
+            height: 100%;
+            outline: none;
+            border: none;
+        }
+
+        .images-grid>.sub-images-grid {
+            min-height: 100%;
+            width: calc(26% - 20px);
+            /*  background: cadetblue; */
+            position: relative;
+            float: right;
+            display: grid;
+            position: relative;
+        }
+
+        .images-grid>.sub-images-grid>.sub-image {
+            width: 100%;
+            min-height: calc(33.33% - 20px);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .images-grid>.sub-images-grid>.sub-image>img:first-child {
+            width: auto;
+            height: 100%;
+            outline: none;
+            padding: 0;
+            border: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .images-grid>.sub-images-grid>.sub-image:not(:first-child) {
+            margin-top: 20px;
+        }
+
+        .hero>.images-grid>.sub-images-grid>.sub-image.active {
+            border: 2px solid green;
+            background: white;
+        }
+
+        /* END IMAGES GRID */
+
+        /* POST CONTENT */
+        .post-content {
+            font-family: 'Lora', serif;
+            font-size: 16px;
+            max-width: 1460px;
+            width: 95%;
+            text-align: justify;
+            margin: auto;
+            position: relative;
+
+        }
+
+        .post-content h3,
+        .post-content h2 {
+            text-align: center;
+            font-size: 1.5em;
+        }
+
+        .post-content img {
+            clear: both;
+            display: block;
+            width: 90%;
+            margin: 20px auto;
+            position: relative;
+        }
+
+        /* END POST CONTENT */
+
+        /* INFO */
+        .website-info {
+            width: 95%;
+            background: rgb(30, 30, 30);
+            color: white;
+            margin: 30px auto;
+            border-radius: 30px;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            font-size: 16.5px;
+            flex-wrap: wrap;
+            font-family: 'Roboto', sans-serif;
+            max-width: 900px;
+            border: 2px double black;
+        }
+
+        .website-info>* {
+            flex: 250px 1 0;
+            line-height: 40px;
+            display: flex;
+            justify-content: center;
+            letter-spacing: 1.3px;
+        }
+        .website-info>* >strong {
+            color: #48c5b5;
+            margin-right: 10px;
+        }
+
+        /* END INFO */
+
+        /* DECORATE */
+        .line-2-squares {
+            width: 80%;
+            max-width: 400px;
+            height: 2px;
+            margin: 40px auto;
+            background: black;
+            position: relative;
+            overflow: visible;
+        }
+
+        .boxes {
+            width: 80px;
+            height: 20px;
+            background: white;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .boxes::before {
+            box-sizing: border-box;
+            content: "";
+            width: 25px;
+            height: 25px;
+            transform: rotate(45deg);
+            border: 3px solid black;
+            position: absolute;
+            right: 23%;
+        }
+
+        .boxes::after {
+            box-sizing: border-box;
+            content: "";
+            width: 25px;
+            height: 25px;
+            border: 3px solid black;
+            transform: rotate(45deg);
+            left: 23%;
+            position: absolute;
+        }
+
+        /* END DECORATE */
+
+        @media screen and (max-width: 800px) {
+            .hero>.images-grid {
+                display: flex;
+                width: 95%;
+                flex-direction: column;
+                margin: auto;
+            }
+
+            .hero>.images-grid>.main {
+                width: 100%;
+                float: left;
+                max-width: unset;
+            }
+
+            .hero>.images-grid>.sub-images-grid {
+                margin: 0;
+                height: auto;
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                /*  background: forestgreen; */
+                position: relative;
+            }
+
+            .hero>.images-grid>.sub-images-grid>.sub-image {
+                width: calc(33.33% - 10px);
+                background: white;
+                min-height: 160px;
+                margin-top: 8px;
+                box-sizing: border-box;
+            }
+
+            .hero>.images-grid>.sub-images-grid>.sub-image>.image {
+                width: auto;
+                height: 100%;
+            }
+
+            .post-content img {
+                width: 100%;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .hero>.images-grid>.sub-images-grid>.sub-image {
+                margin-top: 2px;
+                min-height: 100px;
+                width: calc(33.33% - 3px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main-content">
+        <div class="hero">
+            <h1 class="title">WEBSITE NỘI THẤT SANG TRỌNG ENVYR</h1>
+            <div class="line"></div>
+            <div class="images-grid">
+                <div class="main">
+                    <img class="main-image" src="./public/images/websites/img_3.jpg" alt="">
+                </div>
+                <div class="sub-images-grid">
+                    <div class="sub-image">
+                        <img class="image" src="./public/images/websites/img_1.jpg" alt="">
+                    </div>
+                    <div class="sub-image">
+                        <img class="image" src="./public/images/websites/img_8.jpg" alt="">
+
+                    </div>
+                    <div class="sub-image">
+                        <img class="image" src="./public/images/websites/img_7.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <section class="website-info">
+                <div class="field"><strong>Lĩnh vực</strong> Bất động sản</div>
+                <div class="trend"><strong>Xu Hướng</strong> Hiện đại</div>
+                <div class="color"><strong>Màu sắc</strong> Đen</div>
+                <div class="country"><strong>Quốc Gia</strong> Mỹ</div>
+                <div class="created-date"><strong>Ngày Tạo</strong> 15/07/2020</div>
+                <div class="working-days"><strong>Thời hạn</strong> 5 ngày</div>
+                <div class="price"><strong>Giá</strong> 7,000,000 VNĐ</div>
+            </section>
+
+            <div class="line-2-squares">
+                <div class="boxes"></div>
+            </div>
+            <section class="post-content">
+                <h3>Thông tin chi tiết sản phẩm</h3>
+                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+                    Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit
+                    amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit
+                    amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae,
+                    ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci,
+                    sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent
+                    dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat.
+                    Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+                <ul>
+                    <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+                    <li>Aliquam tincidunt mauris eu risus.</li>
+                    <li>Vestibulum auctor dapibus neque.</li>
+                </ul>
+
+                <img class="image" src="./public/images/websites/img_7.jpg" alt="">
+                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+                    Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit
+                    amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit
+                    amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae,
+                    ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci,
+                    sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent
+                    dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat.
+                    Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+                <h3>Pede Donec Dignissim</h3>
+                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+                    Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit
+                    amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit
+                    amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae,
+                    ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci,
+                    sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent
+                    dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat.
+                    Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+
+            </section>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => document.querySelector('.images-grid').classList.add('faded'), 50)
+        })
+    </script>
+</body>
+
+</html>
