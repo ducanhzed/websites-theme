@@ -485,22 +485,29 @@ router.post('/:type/create', (req, res, next) => {
             let exist = await mongoose.model('Websites').findById(website);
             if (exist) website._id += `-${Date.now()}`;
 
+            const [countryCount, colorCount, fieldCount, trendCount] = await Promise.all([
+                mongoose.model('Websites').find({ 'country': country }).countDocuments(),
+                mongoose.model('Websites').find({ 'color': color }).countDocuments(),
+                mongoose.model('Websites').find({ 'field': field }).countDocuments(),
+                mongoose.model('Websites').find({ 'trend': trend }).countDocuments(),
+            ]);
+
             await Promise.all([
                 mongoose.model('Countries').findOneAndUpdate(
                     { name: country },
-                    { $inc: { quantity: 1 }, $setOnInsert: { name: country, _id: change_alias(country) + `-${Date.now()}` } },
+                    { $set: { $inc: { quantity: 1 } }, $setOnInsert: { quantity: countryCount + 1, name: country, _id: change_alias(country) + `-${Date.now()}` } },
                     { upsert: true }),
                 mongoose.model('colors').findOneAndUpdate(
                     { name: color },
-                    { $inc: { quantity: 1 }, $setOnInsert: { name: color, _id: change_alias(color) + `-${Date.now()}` } },
+                    { $set: { $inc: { quantity: 1 } }, $setOnInsert: { quantity: colorCount + 1, name: color, _id: change_alias(color) + `-${Date.now()}` } },
                     { upsert: true }),
                 mongoose.model('fields').findOneAndUpdate(
                     { name: field },
-                    { $inc: { quantity: 1 }, $setOnInsert: { name: field, _id: change_alias(field) + `-${Date.now()}` } },
+                    { $set: { $inc: { quantity: 1 } }, $setOnInsert: { quantity: fieldCount + 1, name: field, _id: change_alias(field) + `-${Date.now()}` } },
                     { upsert: true }),
                 mongoose.model('trends').findOneAndUpdate(
                     { name: trend },
-                    { $inc: { quantity: 1 }, $setOnInsert: { name: trend, _id: change_alias(trend) + `-${Date.now()}` } },
+                    { $set: { $inc: { quantity: 1 } }, $setOnInsert: { quantity: trendCount + 1, name: trend, _id: change_alias(trend) + `-${Date.now()}` } },
                     { upsert: true }),
                 website.save(),
                 post.save()
@@ -723,24 +730,31 @@ router.post('/:type/modify/:id', (req, res, next) => {
                 )
             ]);
 
+            const [countryCount, colorCount, fieldCount, trendCount] = await Promise.all([
+                mongoose.model('Websites').find({ 'country': newInfo.country }).countDocuments(),
+                mongoose.model('Websites').find({ 'color': newInfo.color }).countDocuments(),
+                mongoose.model('Websites').find({ 'field': newInfo.field }).countDocuments(),
+                mongoose.model('Websites').find({ 'trend': newInfo.trend }).countDocuments(),
+            ]);
+
             await Promise.all([
                 newInfo.save(),
                 mongoose.model('Websites').findByIdAndRemove(id),
                 mongoose.model('Countries').findOneAndUpdate(
                     { name: newInfo.country },
-                    { $inc: { quantity: 1 }, $setOnInsert: { name: newInfo.country, _id: change_alias(newInfo.country) + `-${Date.now()}` } },
+                    { $set: { $inc: { quantity: 1 } }, $setOnInsert: { quantity: countryCount, name: newInfo.country, _id: change_alias(newInfo.country) + `-${Date.now()}` } },
                     { upsert: true }),
                 mongoose.model('colors').findOneAndUpdate(
                     { name: newInfo.color },
-                    { $inc: { quantity: 1 }, $setOnInsert: { name: newInfo.color, _id: change_alias(newInfo.color) + `-${Date.now()}` } },
+                    { $set: { $inc: { quantity: 1 } }, $setOnInsert: { quantity: colorCount, name: newInfo.color, _id: change_alias(newInfo.color) + `-${Date.now()}` } },
                     { upsert: true }),
                 mongoose.model('fields').findOneAndUpdate(
                     { name: newInfo.field },
-                    { $inc: { quantity: 1 }, $setOnInsert: { name: newInfo.field, _id: change_alias(newInfo.field) + `-${Date.now()}` } },
+                    { $set: { $inc: { quantity: 1 } }, $setOnInsert: { quantity: fieldCount, name: newInfo.field, _id: change_alias(newInfo.field) + `-${Date.now()}` } },
                     { upsert: true }),
                 mongoose.model('trends').findOneAndUpdate(
                     { name: newInfo.trend },
-                    { $inc: { quantity: 1 }, $setOnInsert: { name: newInfo.trend, _id: change_alias(newInfo.trend) + `-${Date.now()}` } },
+                    { $set: { $inc: { quantity: 1 } }, $setOnInsert: { quantity: trendCount, name: newInfo.trend, _id: change_alias(newInfo.trend) + `-${Date.now()}` } },
                     { upsert: true }),
             ])
 
