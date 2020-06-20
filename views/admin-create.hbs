@@ -3,13 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create new data</title>
+    <title>Create new {{type}}</title>
+    <link rel="shortcut icon" type="image/png" href="favicon.png" />
+    <link href="/stylesheets/admin.css" rel="stylesheet">
+    <link href="/stylesheets/admin-index.css" rel="stylesheet">
+    <link href="/bootstrap-tagsinput/dist/bootstrap-tagsinput.css"  rel="stylesheet">
+    <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 </head>
 <body>
-    {{#myIf type "==" "news"}}
-        <h1>New</h1>
-    {{else}}
-        <h1>Web</h1>
-    {{/myIf}}
+     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+        {{> admin_header}}
+        <div class="app-main">
+            {{> admin_sidebar}}
+            <div class="app-main__outer">
+               <div class="app-main__inner">
+                   {{#myIf type "==" "news"}}
+                        <div class="card-body">
+                            <h5 class="card-title">NEW INFORMATIONS</h5>
+                             {{#if haveMessage}}
+                                <div class="alert alert-{{message.[0].type}} fade show" role="alert">
+                                    {{#myIf message.[0].type '==' 'success'}}
+                                        <strong>Success</strong> - {{{message.[0].message}}}
+                                    {{else}}
+                                         <strong>Error</strong> - {{{message.[0].message}}}
+                                    {{/myIf}}
+                                </div>
+                            {{/if}}
+                            <form class="form_create form_create_new" enctype="multipart/form-data" action="/admin/{{type}}/create?_csrf={{csrfToken}}" method="POST">
+                                <div class="position-relative form-group">
+                                    <label for="title" class="">Title</label>
+                                    <input name="title" id="title" placeholder="" type="text" class="form-control" required>
+                                </div>
+                                <div class="position-relative form-group">
+                                    <label for="author" class="">Author</label>
+                                    <input name="author" id="author" placeholder="" type="text" class="form-control" required>
+                                </div>
+                                <div class="position-relative form-group">
+                                    <label for="avatar" class="">Avatar</label>
+                                    <input name="avatar" id="avatar" type="file" accept="image/*" class="form-control-file">
+                                     <div class="avatar-preview d-none py-5">
+                                        <img alt="avatar-preview" class="img-thumbnail"/>
+                                    </div>
+                                </div>
+                                <div class="position-relative form-group tags">
+                                    <label for="tags" class="">Tags</label>
+                                    <input name="tags" id="tags" placeholder="" type="text" class="form-control" data-role="tagsinput" required>
+                                </div>
+                                <div class="position-relative form-group">
+                                    <label for="keywords" class="">Keywords</label>
+                                    <input name="keywords" id="keywords" placeholder="" type="text" class="form-control" data-role="tagsinput" required>     
+                                </div>
+                                <div class="position-relative form-group">
+                                    <label for="content" class="">Content</label>
+                                    <textarea name="content" id="content" type="text" class="form-control" required></textarea>
+                                </div>
+                                <input type="hidden" value="{{csrfToken}}" name="_csrf" />
+                                <button class="mt-1 btn btn-primary">Create new</button>
+                            </form>
+                        </div>
+                    {{else}}
+                        <div class="card-body">
+                            <h5 class="card-title" style="width: 100%; text-align: center;">
+                                WEB INFORMATIONS
+                            </h5>
+                            {{#if haveMessage}}
+                                <div class="alert alert-{{message.[0].type}} fade show" role="alert">
+                                    {{#myIf message.[0].type '==' 'success'}}
+                                        <strong>Success</strong> - {{{message.[0].message}}}
+                                    {{else}}
+                                         {{#myIf message.[0].type '==' 'danger'}}
+                                                <strong>Error</strong> - {{{message.[0].message}}}
+                                         {{else}}
+                                                <strong>Info</strong> - {{{message.[0].message}}}
+                                         {{/myIf}}
+                                    {{/myIf}}
+                                </div>
+                            {{/if}}
+                            <form class="form_create form_create_website" enctype="multipart/form-data" action="/admin/{{type}}/create?_csrf={{csrfToken}}" method="POST">
+                                <div class="position-relative form-group">
+                                    <label for="name" class="">Name</label>
+                                    <input name="name" id="name" placeholder="" type="text" class="form-control" required>
+                                </div>
+                                <div class="position-relative form-group">
+                                    <label for="author" class="">Author</label>
+                                    <input name="author" id="author" placeholder="" type="text" class="form-control" required>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="position-relative form-group">
+                                            <label for="field" class="">Field</label>
+                                            <input autocomplete="off"  list="fields" name="field" id="field" placeholder="" type="text" class="form-control ajax-find" data-find="fields" required>
+                                            <div id='fields' class="inputDropdown disabled"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="position-relative form-group">
+                                            <label for="country" class="">Country</label>
+                                            <input autocomplete="off" list="countries" name="country" id="country" placeholder="" type="text" class="form-control ajax-find" data-find="Countries" required>
+                                            <div id='countries' class="inputDropdown disabled"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                          <div class="position-relative form-group">
+                                            <label for="color" class="">Color</label>
+                                            <input autocomplete="off" list="colors" name="color" id="color" placeholder="" type="text" class="form-control ajax-find" data-find="colors" required>
+                                            <div id='colors' class="inputDropdown disabled"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                         <div class="position-relative form-group">
+                                            <label for="trend" class="">Trend</label>
+                                            <input autocomplete="off" list="trends" name="trend" id="trend" placeholder="" type="text" class="form-control ajax-find" data-find="trends" required>
+                                            <div id="trends" class="inputDropdown disabled"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='form-row'>
+                                    <div class="col-md-6">
+                                        <div class="position-relative form-group">
+                                            <label for="price" class="">Price</label>
+                                            <input name="price" id="price" placeholder="" type="number" class="form-control" min="0" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="position-relative form-group">
+                                            <label for="numOfCols" class="">Number of columns</label>
+                                            <input name="numOfCols" id="numOfCols" placeholder="" type="number" class="form-control" min="1" required>
+                                        </div>
+                                    </div>
+                                </div>
+                               <div class="position-relative form-group">
+                                    <label for="images" class="">Images</label>
+                                    <input name="images" id="images" placeholder="" type="file" multiple class="form-control" required>
+                                    <div class="images-preview d-none py-5 row">
+                                        
+                                    </div>
+                                </div>
+                                <h5 class="card-title" style="width: 100%; text-align: center; padding: 2em 0 0">
+                                    POST INFORMATIONS
+                                </h5>
+                                <div class="position-relative form-group">
+                                    <label for="postTitle" class="">Post Title</label>
+                                    <input name="postTitle" id="postTitle" placeholder="" type="text" class="form-control" required>
+                                </div>
+                                <div class="position-relative form-group">
+                                    <label for="postAuthor" class="">Post Author</label>
+                                    <input name="postAuthor" id="postAuthor" placeholder="" type="text" class="form-control">
+                                </div>
+                                <div class="position-relative form-group">
+                                    <label for="content" class="">Post Content</label>
+                                    <textarea name="content" id="content" type="text" class="" required></textarea>
+                                </div>
+                                <input type="hidden" value="{{csrfToken}}" name="_csrf" />
+                                <button class="mt-1 btn btn-primary">Create website</button>
+                            </form>
+                        </div>
+                    {{/myIf}}
+                </div>
+            </div>
+        </div>
+     </div>
+     <script src="/javascripts/jQuery.min.js"></script>
+     <script type="text/javascript" src="/javascripts/admin.js"></script>
+     <script type="text/javascript" src="/bootstrap-tagsinput/dist/typeahead.js"></script>
+     <script type="text/javascript" src="/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+    <script type="text/javascript" src="/javascripts/admin-minh.js"></script>
 </body>
 </html>

@@ -1,13 +1,83 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="vn">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="vn">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>{{title}}</title>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <link rel="shortcut icon" type="image/png" href="favicon.png" />
+    <link href="/stylesheets/admin.css" rel="stylesheet">
 </head>
+
 <body>
-    {{> admin_header}}
+    <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+        {{> admin_header}}
+        <div class="app-main">
+            {{> admin_sidebar}}
+            <div class="app-main__outer">
+               <div class="app-main__inner">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card mb-3 widget-content bg-midnight-bloom">
+                                <div class="widget-content-wrapper text-white">
+                                    <div class="widget-content-left">
+                                        <div class="widget-heading">Total Websites</div>
+                                    </div>
+                                    <div class="widget-content-right">
+                                        <div class="widget-numbers text-white"><span>{{totalWebsites}}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card mb-3 widget-content bg-arielle-smile">
+                                <div class="widget-content-wrapper text-white">
+                                    <div class="widget-content-left">
+                                        <div class="widget-heading">Total News</div>
+                                    </div>
+                                    <div class="widget-content-right">
+                                        <div class="widget-numbers text-white"><span>{{totalNews}}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card mb-3 widget-content bg-grow-early">
+                                <div class="widget-content-wrapper text-white">
+                                    <div class="widget-content-left">
+                                        <div class="widget-heading">Total Views</div>
+                                    </div>
+                                    <div class="widget-content-right">
+                                        <div class="widget-numbers text-white"><span>0</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{!-- <div class="d-xl-none d-lg-block col-md-6 col-xl-4">
+                            <div class="card mb-3 widget-content bg-premium-dark">
+                                <div class="widget-content-wrapper text-white">
+                                    <div class="widget-content-left">
+                                        <div class="widget-heading">Products Sold</div>
+                                    </div>
+                                    <div class="widget-content-right">
+                                        <div class="widget-numbers text-warning"><span>0</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> --}}
+                    </div>
+               </div>
+            </div> 
+            <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+        </div>
+    </div>
+    <script src="/javascripts/jQuery.min.js"></script>
+    <script type="text/javascript" src="/javascripts/admin.js"></script>
+    <script type="text/javascript" src="/javascripts/admin-minh.js"></script>
 </body>
+
 </html>

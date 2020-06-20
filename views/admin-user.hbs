@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="vn">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="vn">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{{title}}</title>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <link rel="shortcut icon" type="image/png" href="favicon.png" />
+    <link href="/stylesheets/admin.css" rel="stylesheet">
+    <link href="/stylesheets/admin-index.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+        {{> admin_header}}
+        <div class="app-main">
+            {{> admin_sidebar}}
+             <div class="app-main__outer">
+               <div class="app-main__inner">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="main-card mb-3 card">
+                                <div class="card-header">List of users
+                                    <div class="ml-md-5">
+                                        <span id='countDocument'>{{count}}</span> / <span id='totalCountDocument'>{{totalCount}} </span>
+                                    </div>                  
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Username</th>
+                                            <th class="text-center">Role</th>
+                                            <th class="text-center">Actions</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{#each users}}
+                                                <tr id={{_id}}>
+                                                    <td></td>
+                                                     <td>
+                                                        <div class="widget-content p-0">
+                                                            <div class="widget-content-wrapper">
+                                                                <div class="widget-content-left flex2">
+                                                                    <div class="widget-heading">{{name}}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-center">{{role}}</td>
+                                                    <td class="text-center">
+                                                        <a href='/admin/user/modify/{{_id}}' type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Modify</a>
+                                                    </td>
+                                                </tr>
+                                            {{/each}}
+                                        </tbody>
+                                    </table>
+                                    </div>
+                                        {{#myIf count "<" totalCount}}
+                                            <div class="d-block text-center card-footer" id="load_more_user">
+                                                <button class="btn-wide btn btn-success" data-url="/admin/user?">Load more</button>
+                                            </div>
+                                        {{/myIf}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/javascripts/jQuery.min.js"></script>
+    <script type="text/javascript" src="/javascripts/admin.js"></script>
+    <script type="text/javascript" src="/javascripts/admin-minh.js"></script>
+</body>

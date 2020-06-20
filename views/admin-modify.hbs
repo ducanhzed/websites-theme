@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modify {{type}}</title>
+    <link rel="shortcut icon" type="image/png" href="favicon.png" />
+    <link href="/stylesheets/admin.css" rel="stylesheet">
+    <link href="/stylesheets/admin-index.css" rel="stylesheet">
+    <link href="/bootstrap-tagsinput/dist/bootstrap-tagsinput.css"  rel="stylesheet">
+    <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+</head>
+<body>
+     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+        {{> admin_header}}
+        <div class="app-main">
+            {{> admin_sidebar}}
+            <div class="app-main__outer">
+               <div class="app-main__inner">
+                   {{#myIf type "==" "news"}}
+                        <div class="card-body">
+                            <h5 class="card-title">CHANGE NEW INFORMATIONS</h5>
+                             {{#if haveMessage}}
+                                <div class="alert alert-{{message.[0].type}} fade show" role="alert">
+                                    {{#myIf message.[0].type '==' 'success'}}
+                                        <strong>Success</strong> - {{{message.[0].message}}}
+                                    {{else}}
+                                         {{#myIf message.[0].type '==' 'danger'}}
+                                                <strong>Error</strong> - {{{message.[0].message}}}
+                                         {{else}}
+                                                <strong>Info</strong> - {{{message.[0].message}}}
+                                         {{/myIf}}
+                                    {{/myIf}}
+                                </div>
+                            {{/if}}
+                            <form class="form_create form_create_new"  enctype="multipart/form-data" action="/admin/{{type}}/modify/{{instance._id}}?_csrf={{csrfToken}}" method="POST">
+                                <div class="position-relative form-group">
+                                    <label for="id" class="">ID</label>
+                                    <input name="_id" id="id" placeholder="" type="text" class="form-control" value="{{instance._id}}">
+                                </div>
+                                <div class="position-relative form-group">
+                                    <label for="title" class="">Title</label>
+                                    <input name="title" id="title" placeholder="" type="text" class="form-control" value="{{instance.title}}">
+                                </div>
+                                <div class="position-relative form-group">
+                                    <label for="author" class="">Author</label>
+                                    <input name="author" id="author" placeholder="" type="text" class="form-control" value="{{instance.author}}">
+                                </div>
+                                <div class="position-relative form-group">
+                                    <label for="avatar" class="">Avatar
+                                        <div class="avatar-preview py-5">
+                                            <img src={{instance.avatar}} alt="avatar-preview" class="img-thumbnail"/>
+                                        </div>
+                                    </label>
+                                    <input name="avatar" id="avatar" type="file" class="form-control-file d-none">
+                                </div>
+                                <div class="position-relative form-group tags">
+                                    <label for="tags" class="">Tags</label>
+                                    <input name="tags" id="tags" placeholder="" type="text" class="form-control" data-role="tagsinput" value="{{instance.tags}}">
+                                </div>
+                                <div class="position-relative form-group">
+                                    <label for="keywords" class="">Keywords</label>
+                                    <input name="keywords" id="keywords" placeholder="" type="text" class="form-control" data-role="tagsinput" value="{{instance.keywords}}">     
+                                </div>
+                                <div class="position-relative form-group">
+                                    <label for="content" class="">Content</label>
+                                    <textarea name="content" id="content" type="text" class="form-control">{{instance.content}}</textarea>
+                                </div>
+                                <input type="hidden" value="{{csrfToken}}" name="_csrf" />
+                                <button class="mt-1 btn btn-primary">Save</button>
+                                <a href='/admin/{{type}}' class="mt-1 btn btn-secondary">Cancel</a>
+                            </form>
+                        </div>
+                    {{else}}
+                        <div class="card-body">
+                            <h5 class="card-title" style="width: 100%; text-align: center;">
+                                CHANGE WEB INFORMATIONS
+                            </h5>
+                             {{#if haveMessage}}
+                                <div class="alert alert-{{message.[0].type}} fade show" role="alert">
+                                    {{#myIf message.[0].type '==' 'success'}}
+                                        <strong>Success</strong> - {{{message.[0].message}}}
+                                    {{else}}
+                                         {{#myIf message.[0].type '==' 'danger'}}
+                                                <strong>Error</strong> - {{{message.[0].message}}}
+                                         {{else}}
+                                                <strong>Info</strong> - {{{message.[0].message}}}
+                                         {{/myIf}}
+                                    {{/myIf}}
+                                </div>
+                            {{/if}}
+                            <form class="form_create form_create_website" enctype="multipart/form-data" action="/admin/{{type}}/modify/{{instance._id}}?_csrf={{csrfToken}}" method="POST">
+                                 <div class="position-relative form-group">
+                                    <label for="id" class="">ID</label>
+                                    <input name="_id" id="id" placeholder="" type="text" class="form-control" value="{{instance._id}}">
+                                </div>
+                                <div class="position-relative form-group">
+                                    <label for="name" class="">Name</label>
+                                    <input name="name" id="name" placeholder="" type="text" class="form-control" value="{{instance.name}}">
+                                </div>
+                                <div class="position-relative form-group">
+                                    <label for="author" class="">Author</label>
+                                    <input name="author" id="author" placeholder="" type="text" class="form-control" value="{{instance.author}}">
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="position-relative form-group">
+                                            <label for="field" class="">Field</label>
+                                            <input autocomplete="off"  list="fields" name="field" id="field" placeholder="" type="text" class="form-control ajax-find" data-find="fields" value="{{instance.field}}">
+                                            <div id='fields' class="inputDropdown disabled"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="position-relative form-group">
+                                            <label for="country" class="">Country</label>
+                                            <input autocomplete="off" list="countries" name="country" id="country" placeholder="" type="text" class="form-control ajax-find" data-find="Countries" value="{{instance.country}}">
+                                            <div id='countries' class="inputDropdown disabled"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                          <div class="position-relative form-group">
+                                            <label for="color" class="">Color</label>
+                                            <input autocomplete="off" list="colors" name="color" id="color" placeholder="" type="text" class="form-control ajax-find" data-find="colors" value="{{instance.color}}">
+                                            <div id='colors' class="inputDropdown disabled"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                         <div class="position-relative form-group">
+                                            <label for="trend" class="">Trend</label>
+                                            <input autocomplete="off" list="trends" name="trend" id="trend" placeholder="" type="text" class="form-control ajax-find" data-find="trends" value="{{instance.trend}}">
+                                            <div id="trends" class="inputDropdown disabled"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='form-row'>
+                                    <div class="col-md-6">
+                                        <div class="position-relative form-group">
+                                            <label for="price" class="">Price</label>
+                                            <input name="price" id="price" placeholder="" type="number" class="form-control" min="0" value="{{instance.price}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="position-relative form-group">
+                                            <label for="numOfCols" class="">Number of columns</label>
+                                            <input name="numOfCols" id="numOfCols" placeholder="" type="number" class="form-control" min="1" value="{{instance.numOfCols}}">
+                                        </div>
+                                    </div>
+                                </div>
+                               <div class="position-relative form-group">
+                                    <label for="images" class="">Images</label>
+                                    {{!-- <input name="images" id="images" placeholder="" type="file" multiple class="form-control"> --}}
+                                    <div class="images-preview py-5 row">
+                                        {{#each instance.images}}
+                                            <div class=" col-md-4">
+                                                <label for="images_{{@index}}">
+                                                    <input name="images_{{@index}}" data-name="images_modify" id="images_{{@index}}" type="file" class="d-none" />
+                                                    <div class="preview_modify_website">
+                                                        <img src={{.}} class='img-thumbnail' />
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        {{/each}}
+                                    </div>
+                                </div>
+                                <h5 class="card-title" style="width: 100%; text-align: center; padding: 2em 0 0">
+                                    POST INFORMATIONS
+                                </h5>
+                                <div class="position-relative form-group">
+                                    <label for="postTitle" class="">Post Title</label>
+                                    <input name="postTitle" id="postTitle" placeholder="" type="text" class="form-control" value="{{instance.details.title}}">
+                                </div>
+                                <div class="position-relative form-group">
+                                    <label for="postAuthor" class="">Post Author</label>
+                                    <input name="postAuthor" id="postAuthor" placeholder="" type="text" class="form-control" value="{{instance.details.author}}">
+                                </div>
+                                <div class="position-relative form-group">
+                                    <label for="content" class="">Post Content</label>
+                                    <textarea name="content" id="content" type="text" class="">{{instance.details.content}}</textarea>
+                                </div>
+                                <input type="hidden" value="{{csrfToken}}" name="_csrf" />
+                                <button class="mt-1 btn btn-primary">Save</button>
+                                <a href='/admin/{{type}}' class="mt-1 btn btn-secondary">Cancel</a>
+                            </form>
+                        </div>
+                    {{/myIf}}
+                </div>
+            </div>
+        </div>
+     </div>
+     <script src="/javascripts/jQuery.min.js"></script>
+     <script type="text/javascript" src="/javascripts/admin.js"></script>
+     <script type="text/javascript" src="/bootstrap-tagsinput/dist/typeahead.js"></script>
+     <script type="text/javascript" src="/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+    <script type="text/javascript" src="/javascripts/admin-minh.js"></script>
+</body>
+</html>
