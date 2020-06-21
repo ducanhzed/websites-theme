@@ -6,7 +6,7 @@ const website = new mongoose.Schema({
     name: { type: String, minlength: 6, required: true },
     images: {
         type: [{ type: String, required: true }],
-        validate: [(val) => val.length === 3, 'images need an array with length of 3']
+        validate: [(val) => val.length === 4, 'images need an array with length of 4']
     },
     author: { type: String, required: true },
     field: { type: String, required: true },

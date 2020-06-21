@@ -20,12 +20,27 @@ const MAX_PRICE = 500000000
 /* GET home page. */
 
 router.get('/tin-tuc', async function (req, res, next) {
-  res.render('category-product', { title: 'Tin Tức', menu: getMenu() });
+  const menu = await getMenu();
+  const newsCount = await newsService.count()
+  let paginationArr = []
+
+  //get pagination Arr
+  for (let i = 1; i <= newsCount; i++) {
+    paginationArr.push(i)
+  }
+
+  // pagination URL request
+  let skip = 0
+  if (req.query['pageNumber']) {
+    skip = (req.query.pageNumber > 0 && (req.query.pageNumber - 1) * CARDS_PER_CATE_PAGE <= newsCount) ? req.query.pageNumber * CARDS_PER_CATE_PAGE : 1
+  }
+
+  let news = await newsService.getNews(skip, CARDS_PER_CATE_PAGE)
+  res.render('all-news', { title: 'Tin Tức', news, menu, paginationArr });
 });
 
 router.get('/danh-muc-websites', async function (req, res, next) {
   // get query info & tags for relative news
-  console.log('in')
   let query = { price: { $gte: -1, $lte: MAX_PRICE } }
   let tagsOrKeyWordsForNews = [];
   if (req.query.highPrice) {
@@ -130,21 +145,24 @@ router.get('/websites/:id', async function (req, res, next) {
   const websitesService = new WebsiteService();
   if (req.params.id) {
     let website = await websitesService.findWebsiteByID(`${req.params.id}`)
+    let menu = await getMenu()
+
     if (website) {
       let recent = req.cookies.recent ? JSON.parse(req.cookies.recent) : [];
       if (!recent.includes(req.params.id)) {
-		recent.unshift(req.params.id);
-		recent = recent.slice(0, 10);
+        recent.unshift(req.params.id);
+        recent = recent.slice(0, 10);
         res.cookie('recent', JSON.stringify(recent), { maxAge: 3600 * 24 * 1000, httpOnly: true });
       } else {
         // Pick that website id to top of list 
         recent = recent.filter(id => id !== req.params.id);
-		recent.unshift(req.params.id);
-		recent = recent.slice(0, 10);
+        recent.unshift(req.params.id);
+        recent = recent.slice(0, 10);
         res.cookie('recent', JSON.stringify(recent), { maxAge: 3600 * 24 * 1000, httpOnly: true });
       }
 
-      res.send(website);
+
+      res.render('website', { title: website.title, website, menu });
     }
     else next();
   }

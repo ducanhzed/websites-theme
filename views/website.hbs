@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,600;1,100;1,300&display=swap"
+        rel="stylesheet">
+    <script src="/javascripts/fontawsome5/js/all.min.js"></script>
+    {{!--     <link rel="stylesheet" href="/stylesheets/category-product.css"> --}}
+
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <link rel="stylesheet" href="/stylesheets/website.css">
+</head>
+
+<body>
+    <!--- MAIN HEADER --->
+    {{> header}}
+    <!--- END MAIN HEADER --->
+
+    {{> sidebar}}
+
+    <div id="main-content">
+
+        <div class="hero">
+            {{#if website}}
+            <h1 class="title">{{website.name}}</h1>
+            <div class="line"></div>
+            <div class="images-grid">
+                <div class="main">
+                    <img class="main-image" src="{{website.images.[0]}}" alt="">
+                </div>
+                <div class="sub-images-grid">
+                    <div class="sub-image">
+                        <img class="image" src="{{website.images.[1]}}" alt="">
+                    </div>
+                    <div class="sub-image">
+                        <img class="image" src="{{website.images.[2]}}" alt="">
+
+                    </div>
+                    <div class="sub-image">
+                        <img class="image" src="{{website.images.[3]}}" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <section class="website-info">
+                <div class="field"><strong>Lĩnh vực</strong> {{website.field}}</div>
+                <div class="trend"><strong>Xu Hướng</strong> {{website.trend}}</div>
+                <div class="color"><strong>Màu sắc</strong> {{website.color}}</div>
+                <div class="country"><strong>Quốc Gia</strong> {{website.country}}</div>
+                <div class="created-date"><strong>Ngày Tạo</strong> {{#dd_mm_yyyy website.createdDate}}{{/dd_mm_yyyy}}
+                </div>
+                <div class="working-days"><strong>Thời hạn</strong> 7 ngày</div>
+                <div class="price"><strong>Giá</strong> {{website.price}} VNĐ</div>
+            </section>
+
+            <div class="line-2-squares">
+                <div class="boxes"></div>
+            </div>
+            <section class="post-content">
+                <h3>Thông tin chi tiết sản phẩm</h3>
+                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+                    Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit
+                    amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit
+                    amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae,
+                    ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci,
+                    sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent
+                    dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat.
+                    Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+                <ul>
+                    <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+                    <li>Aliquam tincidunt mauris eu risus.</li>
+                    <li>Vestibulum auctor dapibus neque.</li>
+                </ul>
+
+                <img class="image" src="/images/websites/img_7.jpg" alt="">
+                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+                    Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit
+                    amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit
+                    amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae,
+                    ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci,
+                    sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent
+                    dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat.
+                    Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+                <h3>Pede Donec Dignissim</h3>
+                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+                    Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit
+                    amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit
+                    amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae,
+                    ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci,
+                    sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent
+                    dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat.
+                    Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
+
+            </section>
+        </div>
+        {{/if}}
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => document.querySelector('.images-grid').classList.add('faded'), 50)
+            console.log('hi')
+            let categoriesBtn = document.querySelector('header #header-mid #categories-btn')
+            let sidebar = document.querySelector('#main-menu.sidebar')
+            let sidebarCloseBtn = document.querySelector('#main-menu.sidebar #close-btn')
+            let sidebarCategories = document.querySelectorAll('#main-menu.sidebar .category');
+
+            //sidebar
+            sidebarCategories.forEach(e => {
+                e.querySelector('.title').addEventListener('click', () => {
+                    //show dropdown
+                    if (e.classList.contains('dropped')) {
+                        e.classList.remove('dropped')
+                    }
+                    else {
+                        sidebarCategories.forEach(cate => {
+                            cate.classList.remove('dropped')
+                        })
+                        e.classList.add('dropped')
+                    }
+                })
+            })
+            document.querySelector('body .overlay').addEventListener('click', () => {
+                sidebar.classList.remove('expand')
+            })
+            categoriesBtn.addEventListener('click', () => {
+                sidebar.classList.add('expand')
+            })
+
+            sidebarCloseBtn.addEventListener('click', () => {
+                console.log('fffffff')
+                sidebar.classList.remove('expand')
+            })
+        })
+    </script>
+</body>

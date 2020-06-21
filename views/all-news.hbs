@@ -22,63 +22,7 @@
     {{> sidebar}}
 
     <div id="main-content">
-        {{> filterForm}}
-        <div class="hero">
-            {{#if websites}}
-            <div class="products-row">
-                {{!-- <h3 class="title">Mới Nhất</h3> --}}
-                <div class="title-divider">
-                    <div class="line"></div>
-                    <div class="dot"></div>
-                </div>
-                
-                <div class="products-grid">
-                    {{#each websites}}
-                    <a class="product" href="/websites/{{_id}}">
-                        <div class="product-card">
-                            <div class="img-wrapper">
-                                <img class="image" src="{{images.[0]}}" alt="">
-                            </div>
-                            <div class="content">
-                                <h3 class="name">{{name}}</h3>
-                                <div class="row">
-                                    <span class="location f-left" style="text-transform: capitalize;">Quốc gia :
-                                        {{country}}</span>
-                                    <span class="date f-right">{{#dd_mm_yyyy createdDate}}{{/dd_mm_yyyy}}</span>
-                                </div>
-                                <div class="row">
-                                    <section class="author f-left">
-                                        <div class="avatar">
-                                        </div>
-                                        <span class="auth-name"><strong>{{author}}</strong></span>
-                                    </section>
-                                    <div class="field f-right">
-                                        <span>{{field}}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    {{/each}}
-                </div>
-            </div>
-            <div class="pagination">
-                {{#if websitesPaginationArr}}
-                <div class="pages">
-                    {{#each websitesPaginationArr}}
-                    <a data-pageNumber={{this}} class="page hide">{{this}}</a>
-                    {{/each}}
-                </div>
-                {{/if}}
-                {{!-- <div class="more">Show me more</div> --}}
-            </div>
-            {{/if}}
-
-        </div>
-        <!-- WEBSITE THEME LIST -->
-        {{> websiteThemeList}}
-        <!-- END WEBSITE THEME LIST -->
-
+       {{!--  filter form --}}
         <!-- NEWS FEED -->
         {{#if news}}
         <div class="hero">
@@ -122,6 +66,16 @@
                     <!-- END EACH NEWS --->
                 </div>
             </div>
+             <div class="pagination">
+                {{#if paginationArr}}
+                <div class="pages">
+                    {{#each paginationArr}}
+                    <a data-pageNumber={{this}} class="page hide">{{this}}</a>
+                    {{/each}}
+                </div>
+                {{/if}}
+                {{!-- <div class="more">Show me more</div> --}}
+            </div>
         </div>
         {{/if}}
         <!-- END NEWS FEED -->
@@ -129,7 +83,7 @@
 
     {{> footer}}
     <!-- END FOOTER -->
-    <script src="/javascripts/category-product.js"></script>
+    <script src="/javascripts/all-news.js"></script>
 </body>
 
 </html>

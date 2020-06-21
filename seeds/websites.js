@@ -36,6 +36,7 @@ mongoose.connect(process.env.DB_URI || 'mongodb://localhost:27017/websiteTheme',
                 images: [
                     images[Math.round(Math.random() * (images.length - 1))],
                     images[Math.round(Math.random() * (images.length - 1))],
+                    images[Math.round(Math.random() * (images.length - 1))],
                     images[Math.round(Math.random() * (images.length - 1))]
                 ],
                 color: colors[Math.round(Math.random() * (colors.length - 1))].toLocaleLowerCase(),
