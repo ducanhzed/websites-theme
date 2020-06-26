@@ -43,7 +43,7 @@ mongoose.connect('mongodb://localhost:27017/websiteTheme', {
         for (let i = 0; i < 500; i++) {
             let seed = {
                 title: 'Tin Tức ' + Date.now() + ' tiếng việt !',
-                content: '<p>Lorem ipsum dolor asit ect amec</p>' + `<img src="${avatars[Math.round(Math.random() * avatars.length)]}"></img>` + "<p>This is a content</p>" + "<p>This is another content</p>",
+                content: '<p>Lorem ipsum dolor asit ect amec</p>' + `<img src="${avatars[Math.floor(Math.random() * avatars.length)]}"></img>` + "<p>This is a content</p>" + "<p>This is another content</p>",
                 author: authors[Math.round(Math.random() * (authors.length - 1))],
                 points: [0],
                 tags: [getCountry(), getColor()],
