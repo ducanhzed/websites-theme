@@ -47,6 +47,7 @@ mongoose.connect(process.env.DB_URI || 'mongodb://localhost:27017/websiteTheme',
                 details: mongoose.Types.ObjectId(postIDs[Math.round(Math.random() * (postIDs.length - 1))]),
                 trend: trends[Math.round(Math.random() * (trends.length - 1))].name,
                 numOfCols: Math.round(Math.random() * 12),
+                completeDates: Math.round(Math.random() * 19 + 1),
             }
             seed['_id'] = titleToID(seed.name)
 

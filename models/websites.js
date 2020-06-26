@@ -17,7 +17,8 @@ const website = new mongoose.Schema({
     createdDate: { type: Date, required: true, default: new Date }, // XX
     /* Số col của website */
     numOfCols: { type: Number, required: true, default: 12 },
-    trend: { type: String, required: true }
+    trend: { type: String, required: true },
+    completeDates: { type: Number, min: 1, required: true }
 })
 
 website.index({ price: 1 })

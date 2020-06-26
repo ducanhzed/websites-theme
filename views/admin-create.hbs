@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="position-relative form-group">
                                     <label for="avatar" class="">Avatar</label>
-                                    <input name="avatar" id="avatar" type="file" accept="image/*" class="form-control-file">
+                                    <input name="avatar" id="avatar" type="file" accept="image/*" class="form-control-file" required>
                                      <div class="avatar-preview d-none py-5">
                                         <img alt="avatar-preview" class="img-thumbnail"/>
                                     </div>
@@ -87,6 +87,10 @@
                                 <div class="position-relative form-group">
                                     <label for="author" class="">Author</label>
                                     <input name="author" id="author" placeholder="" type="text" class="form-control" required>
+                                </div>
+                                 <div class="position-relative form-group">
+                                    <label for="completeDates" class="">Number of date to complete</label>
+                                    <input name="completeDates" id="completeDates" placeholder="" type="number" class="form-control" min="1" >
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-6">

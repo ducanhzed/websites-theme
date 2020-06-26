@@ -457,7 +457,7 @@ $('#images').change(function (e) {
         var reader = new FileReader();
         reader.onload = function (e) {
             $('.images-preview').append(`
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <img src="${e.target.result}" class="img-thumbnail" alt="Preview images index ${i}" />
                 </div>
             `);

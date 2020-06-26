@@ -6,20 +6,18 @@ var passport = require('passport');
 var fs = require('fs');
 var path = require('path');
 var csrf = require('csurf')();
-var mongooseConnecting = require('../services/mongooseConnecting');
 var AdminService = require('../services/admin');
 var change_alias = require('../services/change_alias');
 var router = express.Router();
 
 var Service = new AdminService();
-//mongoose.connection.readyState || mongooseConnecting();
-
 var multer = require('multer');
 var storage = multer.diskStorage(Service.multerConfig());
 var upload = multer({ storage: storage });
 
 var updateStorage = multer.diskStorage(Service.multerConfigUpdateWebsite());
 var updateImageWebsite = multer({ storage: updateStorage });
+var NUM_OF_IMAGES = 4;
 
 require('../models/posts');
 require('../models/news');
@@ -433,6 +431,7 @@ router.post('/:type/create', (req, res, next) => {
                 postTitle = '',
                 postAuthor = '',
                 content = '',
+                completeDates,
                 images = []
             } = req.body;
 
@@ -442,6 +441,24 @@ router.post('/:type/create', (req, res, next) => {
                 images.map(url => path.join(require('app-root-path').path, 'public', url)).forEach(filename => fs.existsSync(filename) && fs.unlinkSync(filename));
                 req.session.messages || (req.session.messages = []);
                 req.session.messages.push({ type: 'danger', message: `Number of columns and price must be number` });
+                return res.redirect(`/admin/${req.params.type}/create`);
+            }
+            if (Number(price) < 0 || Number(numOfCols) < 1) {
+                images.map(url => path.join(require('app-root-path').path, 'public', url)).forEach(filename => fs.existsSync(filename) && fs.unlinkSync(filename));
+                req.session.messages || (req.session.messages = []);
+                req.session.messages.push({ type: 'danger', message: `Number of columns and price is invalid` });
+                return res.redirect(`/admin/${req.params.type}/create`);
+            }
+            if (Number.isNaN(Number(completeDates))) {
+                images.map(url => path.join(require('app-root-path').path, 'public', url)).forEach(filename => fs.existsSync(filename) && fs.unlinkSync(filename));
+                req.session.messages || (req.session.messages = []);
+                req.session.messages.push({ type: 'danger', message: `"Number of date to complete" must be number` });
+                return res.redirect(`/admin/${req.params.type}/create`);
+            }
+            if (Number(completeDates) < 1) {
+                images.map(url => path.join(require('app-root-path').path, 'public', url)).forEach(filename => fs.existsSync(filename) && fs.unlinkSync(filename));
+                req.session.messages || (req.session.messages = []);
+                req.session.messages.push({ type: 'danger', message: `"Number of date to complete" must be greater than 0` });
                 return res.redirect(`/admin/${req.params.type}/create`);
             }
             if (!country || !field || !trend || !color || !name || !author || !postTitle || !content) {
@@ -456,23 +473,23 @@ router.post('/:type/create', (req, res, next) => {
                 req.session.messages.push({ type: 'danger', message: `Name of website must at least 6 characters length` });
                 return res.redirect(`/admin/${req.params.type}/create`);
             }
-            if (images.length < 3) {
+            if (images.length < NUM_OF_IMAGES) {
                 images.map(url => path.join(require('app-root-path').path, 'public', url)).forEach(filename => fs.existsSync(filename) && fs.unlinkSync(filename));
                 req.session.messages || (req.session.messages = []);
-                req.session.messages.push({ type: 'danger', message: `We need 3 images of website` });
+                req.session.messages.push({ type: 'danger', message: `We need ${NUM_OF_IMAGES} images of website` });
                 return res.redirect(`/admin/${req.params.type}/create`);
-            } else if (images.length > 3) {
-                let remainImage = images.slice(3).map(url => path.join(require('app-root-path').path, 'public', url));
-                images = images.slice(0, 3);
+            } else if (images.length > NUM_OF_IMAGES) {
+                let remainImage = images.slice(NUM_OF_IMAGES).map(url => path.join(require('app-root-path').path, 'public', url));
+                images = images.slice(0, NUM_OF_IMAGES);
                 remainImage.forEach(filename => fs.existsSync(filename) && fs.unlinkSync(filename));
                 req.session.messages || (req.session.messages = []);
-                req.session.messages.push({ type: 'info', message: `We can only save 3 images, any more will be removed.` });
+                req.session.messages.push({ type: 'info', message: `We can only save ${NUM_OF_IMAGES} images, any more will be removed.` });
             }
 
             [country, field, trend, color] = [country, field, trend, color].map(x => x.toLowerCase());
             const postId = mongoose.Types.ObjectId();
             const website = mongoose.model('Websites')({
-                name, author, images, field, country, color, trend, price, numOfCols,
+                name, author, images, field, country, color, trend, price, numOfCols, completeDates,
                 _id: change_alias(name),
                 details: postId
             });
@@ -586,7 +603,8 @@ router.post('/:type/modify/:id', (req, res, next) => {
         updateImageWebsite.fields([
             { name: 'images_0' },
             { name: 'images_1' },
-            { name: 'images_2' }
+            { name: 'images_2' },
+            { name: 'images_3' }
         ])(req, res, next);
     } else {
         req.session.messages || (res.session.messages = []);
@@ -660,6 +678,7 @@ router.post('/:type/modify/:id', (req, res, next) => {
                 postTitle = '',
                 postAuthor = '',
                 content = '',
+                completeDates,
                 images = {}
             } = req.body;
 
@@ -671,6 +690,24 @@ router.post('/:type/modify/:id', (req, res, next) => {
                 Object.values(images).map(url => path.join(require('app-root-path').path, 'public', url)).forEach(filename => fs.existsSync(filename) && fs.unlinkSync(filename));
                 req.session.messages || (req.session.messages = []);
                 req.session.messages.push({ type: 'danger', message: `Number of columns and price must be number` });
+                return res.redirect(`/admin/${type}/modify/${id}`);
+            }
+            if (Number(price) < 0 || Number(numOfCols) < 1) {
+                Object.values(images).map(url => path.join(require('app-root-path').path, 'public', url)).forEach(filename => fs.existsSync(filename) && fs.unlinkSync(filename));
+                req.session.messages || (req.session.messages = []);
+                req.session.messages.push({ type: 'danger', message: `Number of columns and price is invalid` });
+                return res.redirect(`/admin/${type}/modify/${id}`);
+            }
+            if (Number.isNaN(Number(completeDates))) {
+                Object.values(images).map(url => path.join(require('app-root-path').path, 'public', url)).forEach(filename => fs.existsSync(filename) && fs.unlinkSync(filename));
+                req.session.messages || (req.session.messages = []);
+                req.session.messages.push({ type: 'danger', message: `"Number of date to complete" must be number` });
+                return res.redirect(`/admin/${type}/modify/${id}`);
+            }
+            if (Number(completeDates) < 1) {
+                Object.values(images).map(url => path.join(require('app-root-path').path, 'public', url)).forEach(filename => fs.existsSync(filename) && fs.unlinkSync(filename));
+                req.session.messages || (req.session.messages = []);
+                req.session.messages.push({ type: 'danger', message: `"Number of date to complete" must be greater than 0` });
                 return res.redirect(`/admin/${type}/modify/${id}`);
             }
             if (!_id || !country || !field || !trend || !color || !name || !author || !postTitle || !content) {
@@ -698,7 +735,7 @@ router.post('/:type/modify/:id', (req, res, next) => {
                 return res.redirect(`/admin/${type}/modify/${id}`);
             }
 
-            let update = { _id, name, author, field, country, color, price, numOfCols, trend };
+            let update = { _id, name, author, field, country, color, price, numOfCols, trend, completeDates };
             let oldInfo = await mongoose.model('Websites').findById(id).lean();
             if (!oldInfo) return res.redirect(`/admin/${type}`);
 
@@ -706,8 +743,10 @@ router.post('/:type/modify/:id', (req, res, next) => {
             Object.keys(images).map(key => {
                 const new_url = images[key], change_index = Number(key.split('_')[1]);
                 const old_url = path.join(require('app-root-path').path, 'public', oldInfo.images[change_index]);
-                newInfo.images[change_index] = new_url;
-                fs.existsSync(old_url) && fs.unlinkSync(old_url);
+                if (change_index < NUM_OF_IMAGES) {
+                    newInfo.images[change_index] = new_url;
+                    fs.existsSync(old_url) && fs.unlinkSync(old_url);
+                }
             });
 
             await Promise.all([

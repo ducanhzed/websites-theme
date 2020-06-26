@@ -24,7 +24,7 @@ mongoose.connect('mongodb://localhost:27017/websiteTheme', {
             '/images/news/img_3.jpg',
             '/images/news/img_4.jpg',
             '/images/news/img_5.png',
-            './images/news/img_6.jpg',
+            '/images/news/img_6.jpg',
             '/images/news/img_7.jpg',]
 
         let regex = /([^\w\s\d])/g
