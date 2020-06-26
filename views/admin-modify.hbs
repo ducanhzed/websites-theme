@@ -102,6 +102,10 @@
                                     <label for="author" class="">Author</label>
                                     <input name="author" id="author" placeholder="" type="text" class="form-control" value="{{instance.author}}">
                                 </div>
+                                <div class="position-relative form-group">
+                                    <label for="completeDates" class="">Number of date to complete</label>
+                                    <input name="completeDates" id="completeDates" placeholder="" type="number" class="form-control" value="{{instance.completeDates}}" min="1">
+                                </div>
                                 <div class="form-row">
                                     <div class="col-md-6">
                                         <div class="position-relative form-group">
@@ -151,7 +155,7 @@
                                     {{!-- <input name="images" id="images" placeholder="" type="file" multiple class="form-control"> --}}
                                     <div class="images-preview py-5 row">
                                         {{#each instance.images}}
-                                            <div class=" col-md-4">
+                                            <div class=" col-md-3">
                                                 <label for="images_{{@index}}">
                                                     <input name="images_{{@index}}" data-name="images_modify" id="images_{{@index}}" type="file" class="d-none" />
                                                     <div class="preview_modify_website">
